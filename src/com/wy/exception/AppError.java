@@ -7,7 +7,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.lang.Thread.UncaughtExceptionHandler;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.os.Environment;
@@ -15,6 +14,7 @@ import android.widget.Toast;
 
 import com.wy.AppConstants;
 import com.wy.AppContext;
+import com.wy.utils.lang.DateUtil;
 import com.wy.utils.ui.ActivityTaskManager;
 
 /** 
@@ -138,7 +138,7 @@ public class AppError implements UncaughtExceptionHandler{
 		//在控制台打印
 		System.err.println(sb.toString());
 		
-		String errorlog = "throwable_log"+new SimpleDateFormat("yyyyMMdd").format(new Date())+".txt";
+		String errorlog = "throwable_log"+DateUtil.date2TimeStr(new Date(),"yyyyMMdd")+".txt";
 		String savePath = "";
 		String logFilePath = "";
 		FileWriter fw = null;

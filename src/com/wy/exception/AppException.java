@@ -7,6 +7,8 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.wy.utils.lang.DateUtil;
+
 
 import android.os.Environment;
 
@@ -19,7 +21,7 @@ import android.os.Environment;
  * 
  * 创建时间: 2013-1-16
  */
-public abstract class AppException extends Exception implements IAppException{
+public abstract class AppException extends Exception{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -28,7 +30,7 @@ public abstract class AppException extends Exception implements IAppException{
 	 * @param excp
 	 */
 	public void saveErrorLog(Exception excp,String savePath) {
-		String errorlog = "exception_log"+new SimpleDateFormat("yyyyMMdd").format(new Date())+".txt";
+		String errorlog = "exception_log"+ DateUtil.date2TimeStr(new Date(),"yyyyMMdd")+".txt";
 		String logFilePath = "";
 		FileWriter fw = null;
 		PrintWriter pw = null;

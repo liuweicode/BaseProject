@@ -40,7 +40,7 @@ public abstract class AppClient{
 	/*字符编码*/
 	protected final static String UTF_8 = "UTF-8";
 	
-	public final static String CONF_COOKIE = "cookie";
+	public final static String COOKIE = "cookie";
 	
 	/**
 	 * 获取请求的主机
@@ -48,9 +48,6 @@ public abstract class AppClient{
 	 * @return
 	 */
 	public abstract String getHost();
-	
-	protected AppClient() {
-	}
 	
 	protected static String appCookie;
 	
@@ -62,7 +59,7 @@ public abstract class AppClient{
 	
 	protected String getCookie() {
 		if(appCookie == null || appCookie == "") {
-			appCookie = AppContext.getInstance().getProperty(CONF_COOKIE);
+			appCookie = AppContext.getInstance().getProperty(COOKIE);
 		}
 		return appCookie;
 	}

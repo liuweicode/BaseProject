@@ -1,7 +1,9 @@
 package com.wy.utils.lang;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,6 +41,15 @@ public class DateUtil {
 		calendar.setTimeInMillis(date.getTime()) ;
 		
 		return calendar2TimeStr(calendar) ;  
+	}
+	
+	/**
+	 * 
+	 * @param date
+	 * @return    String :  2011-16-45 02:30:11
+	 */
+	public static String date2TimeStr(Date date,String pattern){
+		return new SimpleDateFormat(pattern,Locale.getDefault()).format(date);
 	}
 	
 	/**

@@ -32,10 +32,6 @@ import com.wy.net.AppClient;
  */
 public abstract class XmlAppClient extends AppClient{
 
-	protected XmlAppClient() {
-
-	}
-
 	/**
 	 * get请求URL
 	 * 
@@ -163,7 +159,7 @@ public abstract class XmlAppClient extends AppClient{
 					}
 					// 保存cookie
 					if (appContext != null && tmpcookies != "") {
-						appContext.setProperty(CONF_COOKIE, tmpcookies);
+						appContext.setProperty(COOKIE, tmpcookies);
 						appCookie = tmpcookies;
 					}
 				}

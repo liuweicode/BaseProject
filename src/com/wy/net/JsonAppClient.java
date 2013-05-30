@@ -33,12 +33,6 @@ import com.wy.net.AppClient;
  */
 public abstract class JsonAppClient extends AppClient{
 
-	protected static final String TAG = "JsonAppClient";
-	
-	protected JsonAppClient() {
-		
-	}
-	
 	/**
 	 * get请求URL
 	 * @param url
@@ -167,7 +161,7 @@ public abstract class JsonAppClient extends AppClient{
 		            }
 		            //保存cookie   
 	        		if(appContext != null && tmpcookies != ""){
-	        			appContext.setProperty(CONF_COOKIE, tmpcookies);
+	        			appContext.setProperty(COOKIE, tmpcookies);
 	        			appCookie = tmpcookies;
 	        		}
 		        }
