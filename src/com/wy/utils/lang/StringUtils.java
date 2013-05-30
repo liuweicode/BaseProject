@@ -1,4 +1,4 @@
-package com.wy.utils;
+package com.wy.utils.lang;
 
 import java.util.Locale;
 

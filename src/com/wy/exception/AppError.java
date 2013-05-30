@@ -11,13 +11,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.os.Environment;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.wy.AppConstants;
 import com.wy.AppContext;
-import com.wy.AppManager;
-import com.wy.mail.Mail;
+import com.wy.utils.ui.ActivityTaskManager;
 
 /** 
  * 描述：系统严重异常（如程序异常退出）
@@ -57,7 +55,7 @@ public class AppError implements UncaughtExceptionHandler{
 				//AppException.exc(e).makeToast(AppContext.getContext());
 			}
 			//退出程序
-			AppManager.getAppManager().AppExit(AppContext.getContext());
+			ActivityTaskManager.getInstance().AppExit(AppContext.getContext());
 		}
 	}
 	

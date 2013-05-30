@@ -1,4 +1,4 @@
-package com.wy.common;
+package com.wy.utils.net;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -9,6 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DecimalFormat;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -29,13 +30,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.wy.AppConstants;
 import com.wy.R;
 import com.wy.bean.Update;
-import com.wy.common.client.IJsonAppClient;
-import com.wy.common.client.IXmlAppClient;
+import com.wy.widget.AppToast;
 
 /** 
  * 描述：App更新管理类
@@ -93,7 +92,8 @@ public class UpdateManager {
 	
 	private Update mUpdate;
 	
-    private Handler mHandler = new Handler(){
+    @SuppressLint("HandlerLeak")
+	private Handler mHandler = new Handler(){
     	public void handleMessage(Message msg) {
     		switch (msg.what) {
 			case DOWN_UPDATE:
@@ -106,7 +106,7 @@ public class UpdateManager {
 				break;
 			case DOWN_NOSDCARD:
 				downloadDialog.dismiss();
-				Toast.makeText(mContext, "无法下载安装文件，请检查SD卡是否挂载", 3000).show();
+				AppToast.makeText(mContext, "无法下载安装文件，请检查SD卡是否挂载", AppToast.SOUND_NO).show();
 				break;
 			}
     	};
@@ -125,72 +125,7 @@ public class UpdateManager {
 	 * @param context
 	 * @param isShowMsg 是否显示提示消息
 	 */
-	public void checkAppUpdate(final Context context, final boolean isShowMsg,final IXmlAppClient client){
-		this.mContext = context;
-		if(isShowMsg){
-			if(mProDialog == null)
-				mProDialog = ProgressDialog.show(mContext, null, "正在检测，请稍后...", true, true);
-			else if(mProDialog.isShowing() || (latestOrFailDialog!=null && latestOrFailDialog.isShowing()))
-				return;
-		}
-		final Handler handler = new Handler(){
-			public void handleMessage(Message msg) {
-				//进度条对话框不显示 - 检测结果也不显示
-				if(mProDialog != null && !mProDialog.isShowing()){
-					return;
-				}
-				//关闭并释放释放进度条对话框
-				if(isShowMsg && mProDialog != null){
-					mProDialog.dismiss();
-					mProDialog = null;
-				}
-				//显示检测结果
-				if(msg.what == 1){
-					mUpdate = (Update)msg.obj;
-					if(mUpdate != null){
-						int curVersionCode = -1;
-						//获取当前版本号
-						try {
-							PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_CONFIGURATIONS);
-							curVersionCode = packageInfo.versionCode;
-						} catch (NameNotFoundException e) {
-							e.printStackTrace();
-						}
-						
-						if(curVersionCode < mUpdate.getVersionCode()){
-							apkUrl = mUpdate.getDownloadURL();
-							updateMsg = mUpdate.getVersionDesc();
-							showNoticeDialog();
-						}else if(isShowMsg){
-							showLatestOrFailDialog(DIALOG_TYPE_LATEST);
-						}
-					}
-				}else if(isShowMsg){
-					showLatestOrFailDialog(DIALOG_TYPE_FAIL);
-				}
-			}
-		};
-		new Thread(){
-			public void run() {
-				Message msg = new Message();
-				try {					
-					Update update = client.checkVersion();
-					msg.what = 1;
-					msg.obj = update;
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				handler.sendMessage(msg);
-			}			
-		}.start();		
-	}	
-	
-	/**
-	 * 检查App更新
-	 * @param context
-	 * @param isShowMsg 是否显示提示消息
-	 */
-	public void checkAppUpdate(final Context context, final boolean isShowMsg,final IJsonAppClient client){
+	public void checkAppUpdate(final Context context, final boolean isShowMsg,final CheckVersionInterface client){
 		this.mContext = context;
 		if(isShowMsg){
 			if(mProDialog == null)
@@ -444,5 +379,15 @@ public class UpdateManager {
         i.setAction(android.content.Intent.ACTION_VIEW);
         i.setDataAndType(Uri.parse("file://" + apkfile.toString()), "application/vnd.android.package-archive"); 
         mContext.startActivity(i);
+	}
+	
+	public static interface CheckVersionInterface{
+		/**
+		 * 版本更新
+		 * 
+		 * @return
+		 * @throws Exception
+		 */
+		public Update checkVersion() throws Exception;
 	}
 }

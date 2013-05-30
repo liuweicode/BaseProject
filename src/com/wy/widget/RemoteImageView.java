@@ -30,10 +30,18 @@ import com.wy.AppContext;
 public class RemoteImageView extends ImageView{
 	
 	private static final String LOG_TAG = "RemoteImageView";
-	/**
-	 * Maximum number of unsuccesful tries of downloading an image
-	 */
-	private static int MAX_FAILURES = 3;
+	
+	private RemoteImageViewLoadingListener remoteImageViewLoadingListener;
+	
+	public void setRemoteImageViewLoadingListener(
+			RemoteImageViewLoadingListener remoteImageViewLoadingListener) {
+		this.remoteImageViewLoadingListener = remoteImageViewLoadingListener;
+	}
+
+//	/**
+//	 * Maximum number of unsuccesful tries of downloading an image
+//	 */
+//	private static int MAX_FAILURES = 3;
 
 	public RemoteImageView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -69,7 +77,7 @@ public class RemoteImageView extends ImageView{
 	/**
 	 * Remote image download failure counter
 	 */
-	private int mFailure;
+//	private int mFailure;
 
 	/**
 	 * Position of the image in the mListView
@@ -98,17 +106,19 @@ public class RemoteImageView extends ImageView{
 			return;
 		}
 		
-		if(mUrl != null && mUrl.equals(url)){
-			mFailure++;
-			if(mFailure > MAX_FAILURES){
-				Log.e(LOG_TAG, "Failed to download "+url+", falling back to default image");
-				loadDefaultImage();
-				return;
-			}
-		} else {
-			mUrl = url;
-			mFailure = 0;
-		}
+//		if(mUrl != null && mUrl.equals(url)){
+//			mFailure++;
+//			if(mFailure > MAX_FAILURES){
+//				Log.e(LOG_TAG, "Failed to download "+url+", falling back to default image");
+//				loadDefaultImage();
+//				return;
+//			}
+//		} else {
+//			mUrl = url;
+//			mFailure = 0;
+//		}
+		
+		mUrl = url;
 
 		ImageCache imageCache = AppContext.getInstance().getImageCache();
 		if(imageCache.isCached(url)){
@@ -187,6 +197,9 @@ public class RemoteImageView extends ImageView{
 							Log.d(LOG_TAG, "Image cached "+mTaskUrl);
 						} else {
 							Log.w(LOG_TAG, "Failed to cache "+mTaskUrl);
+							if(remoteImageViewLoadingListener!=null){
+								remoteImageViewLoadingListener.onNetImageLoadError();
+							}
 						}
 					} catch (NullPointerException e) {
 						Log.w(LOG_TAG, "Failed to cache "+mTaskUrl);
@@ -241,6 +254,19 @@ public class RemoteImageView extends ImageView{
 			return containsKey(url) && get(url) != null;
 		}
 
+	}
+	
+	/**
+	 * 加载网络图片的监听类
+	 * 
+	 * @author liuwei
+	 *
+	 */
+	public interface RemoteImageViewLoadingListener{
+		/**
+		 * 图片加载失败触发的事件
+		 */
+		public void onNetImageLoadError();
 	}
 
 }

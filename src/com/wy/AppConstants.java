@@ -1,11 +1,11 @@
 package com.wy;
 
-import com.wy.utils.StringUtils;
-import com.wy.widget.AppToast;
-
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+
+import com.wy.utils.lang.StringUtils;
+import com.wy.widget.AppToast;
 
 /** 
  * 描述：应用程序常量
@@ -18,6 +18,8 @@ import android.content.pm.PackageManager.NameNotFoundException;
  */
 public abstract class AppConstants {
 
+	public final static String CONF_APP_UNIQUEID = "APP_UNIQUEID";//App唯一标识
+	
 	public static final int PAGE_SIZE = 20;//默认分页大小
 	
 	public static String WY_UPDATE_APK_PATH = "/WY/Update/";//软件更新默认保存目录
@@ -45,6 +47,6 @@ public abstract class AppConstants {
 		} catch (NameNotFoundException e) {
 			AppToast.makeText(AppContext.getContext(), "请在AndroidManifest.xml文件配置目录信息！", AppToast.SOUND_ERROR).show();
 		}
-		
 	}
+	
 }

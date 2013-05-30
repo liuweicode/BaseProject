@@ -12,6 +12,8 @@ import android.os.Environment;
 import android.os.StatFs;
 import android.util.Log;
 
+import com.wy.utils.lang.StringUtils;
+
 /** 
  * 描述：文件操作工具类
  *

@@ -10,16 +10,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Properties;
+import java.util.UUID;
 
 import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 
 import com.wy.exception.AppError;
-import com.wy.utils.StringUtils;
+import com.wy.utils.lang.StringUtils;
 import com.wy.widget.RemoteImageView.ImageCache;
 
 /** 
@@ -34,10 +33,6 @@ import com.wy.widget.RemoteImageView.ImageCache;
 public class AppContext extends Application{
 	
 	protected final String LOG_TAG = this.getClass().getSimpleName();
-	
-	public static final int NETTYPE_WIFI = 0x01;
-	public static final int NETTYPE_CMWAP = 0x02;
-	public static final int NETTYPE_CMNET = 0x03;
 	
 	private static AppContext instance;
 	protected static Context appContext;
@@ -69,42 +64,19 @@ public class AppContext extends Application{
 		return appContext;
 	}
 	
-    /**
-	 * 检测网络是否可用
+	/**
+	 * 获取App唯一标识
 	 * @return
 	 */
-	public boolean isNetworkConnected() {
-		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo ni = cm.getActiveNetworkInfo();
-		return ni != null && ni.isConnectedOrConnecting();
+	public String getAppId() {
+		String uniqueID = getProperty(AppConstants.CONF_APP_UNIQUEID);
+		if(StringUtils.isEmpty(uniqueID)){
+			uniqueID = UUID.randomUUID().toString();
+			setProperty(AppConstants.CONF_APP_UNIQUEID, uniqueID);
+		}
+		return uniqueID;
 	}
     
-    /**
-	 * 获取当前网络类型
-	 * @return 0：没有网络   1：WIFI网络   2：WAP网络    3：NET网络
-	 */
-	public int getNetworkType() {
-		int netType = 0;
-		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-		if (networkInfo == null) {
-			return netType;
-		}		
-		int nType = networkInfo.getType();
-		if (nType == ConnectivityManager.TYPE_MOBILE) {
-			String extraInfo = networkInfo.getExtraInfo();
-			if(!StringUtils.isEmpty(extraInfo)){
-				if (extraInfo.toLowerCase().equals("cmnet")) {
-					netType = NETTYPE_CMNET;
-				} else {
-					netType = NETTYPE_CMWAP;
-				}
-			}
-		} else if (nType == ConnectivityManager.TYPE_WIFI) {
-			netType = NETTYPE_WIFI;
-		}
-		return netType;
-	}
     
 	/**
 	 * 判断缓存数据是否可读

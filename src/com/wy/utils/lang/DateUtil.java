@@ -1,4 +1,4 @@
-package com.wy.utils;
+package com.wy.utils.lang;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /** 
- * 描述：
+ * 描述：日期工具类
  *
  * 作者: Liu wei
  * 
