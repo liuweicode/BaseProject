@@ -20,6 +20,7 @@ import android.net.NetworkInfo;
 
 import com.wy.exception.AppError;
 import com.wy.utils.StringUtils;
+import com.wy.widget.RemoteImageView.ImageCache;
 
 /** 
  * 描述：应用程序上下文 保存全局属性
@@ -38,16 +39,30 @@ public class AppContext extends Application{
 	public static final int NETTYPE_CMWAP = 0x02;
 	public static final int NETTYPE_CMNET = 0x03;
 	
+	private static AppContext instance;
 	protected static Context appContext;
 	
 	@Override
 	public void onCreate(){
+		instance = this;
 		super.onCreate();
 		appContext = getApplicationContext();
+		
+		mImageCache = new ImageCache();
 		
 		//当程序发生Uncaught异常时捕获
 		AppError appCrashHandler = new AppError();
 		appCrashHandler.initUncaught();
+	}
+	
+	private ImageCache mImageCache;
+	
+	public ImageCache getImageCache() {
+		return mImageCache;
+	}
+	
+	public static AppContext getInstance(){
+		return instance;
 	}
 	
 	public static Context getContext(){
