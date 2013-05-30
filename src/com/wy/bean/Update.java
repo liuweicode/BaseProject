@@ -1,7 +1,5 @@
 package com.wy.bean;
 
-
-
 /** 
  * 描述：版本更新
  *
@@ -11,9 +9,7 @@ package com.wy.bean;
  * 
  * 创建时间: 2013-1-29
  */
-public class Update extends Base{
-
-	private static final long serialVersionUID = 1741970662701723555L;
+public class Update{
 
 	protected int versionCode;//版本号
 	
