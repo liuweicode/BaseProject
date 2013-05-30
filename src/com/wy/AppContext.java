@@ -23,13 +23,13 @@ import com.wy.utils.StringUtils;
 import com.wy.widget.RemoteImageView.ImageCache;
 
 /** 
- * ÃèÊö£ºÓ¦ÓÃ³ÌĞòÉÏÏÂÎÄ ±£´æÈ«¾ÖÊôĞÔ
+ * æè¿°ï¼šåº”ç”¨ç¨‹åºä¸Šä¸‹æ–‡ ä¿å­˜å…¨å±€å±æ€§
  *
- * ×÷Õß: Liu wei
+ * ä½œè€…: Liu wei
  * 
- * ÓÊÏä£ºi@liuwei.co
+ * é‚®ç®±ï¼ši@liuwei.co
  * 
- * ´´½¨Ê±¼ä: 2013-1-16
+ * åˆ›å»ºæ—¶é—´: 2013-1-16
  */
 public class AppContext extends Application{
 	
@@ -50,7 +50,7 @@ public class AppContext extends Application{
 		
 		mImageCache = new ImageCache();
 		
-		//µ±³ÌĞò·¢ÉúUncaughtÒì³£Ê±²¶»ñ
+		//å½“ç¨‹åºå‘ç”ŸUncaughtå¼‚å¸¸æ—¶æ•è·
 		AppError appCrashHandler = new AppError();
 		appCrashHandler.initUncaught();
 	}
@@ -70,7 +70,7 @@ public class AppContext extends Application{
 	}
 	
     /**
-	 * ¼ì²âÍøÂçÊÇ·ñ¿ÉÓÃ
+	 * æ£€æµ‹ç½‘ç»œæ˜¯å¦å¯ç”¨
 	 * @return
 	 */
 	public boolean isNetworkConnected() {
@@ -80,8 +80,8 @@ public class AppContext extends Application{
 	}
     
     /**
-	 * »ñÈ¡µ±Ç°ÍøÂçÀàĞÍ
-	 * @return 0£ºÃ»ÓĞÍøÂç   1£ºWIFIÍøÂç   2£ºWAPÍøÂç    3£ºNETÍøÂç
+	 * è·å–å½“å‰ç½‘ç»œç±»å‹
+	 * @return 0ï¼šæ²¡æœ‰ç½‘ç»œ   1ï¼šWIFIç½‘ç»œ   2ï¼šWAPç½‘ç»œ    3ï¼šNETç½‘ç»œ
 	 */
 	public int getNetworkType() {
 		int netType = 0;
@@ -107,7 +107,7 @@ public class AppContext extends Application{
 	}
     
 	/**
-	 * ÅĞ¶Ï»º´æÊı¾İÊÇ·ñ¿É¶Á
+	 * åˆ¤æ–­ç¼“å­˜æ•°æ®æ˜¯å¦å¯è¯»
 	 * @param cachefile
 	 * @return
 	 */
@@ -117,7 +117,7 @@ public class AppContext extends Application{
 	}
 	
 	/**
-	 * ±£´æ¶ÔÏó
+	 * ä¿å­˜å¯¹è±¡
 	 * @param ser
 	 * @param file
 	 * @throws IOException
@@ -145,7 +145,7 @@ public class AppContext extends Application{
 	}
 	
 	/**
-	 * ¶ÁÈ¡¶ÔÏó
+	 * è¯»å–å¯¹è±¡
 	 * @param file
 	 * @return
 	 * @throws IOException
@@ -162,7 +162,7 @@ public class AppContext extends Application{
 		}catch(FileNotFoundException e){
 		}catch(Exception e){
 			e.printStackTrace();
-			//·´ĞòÁĞ»¯Ê§°Ü - É¾³ı»º´æÎÄ¼ş
+			//ååºåˆ—åŒ–å¤±è´¥ - åˆ é™¤ç¼“å­˜æ–‡ä»¶
 			if(e instanceof InvalidClassException){
 				File data = getFileStreamPath(file);
 				data.delete();
@@ -179,7 +179,7 @@ public class AppContext extends Application{
 	}
 	
 	/**
-	 * ÅĞ¶Ï»º´æÊÇ·ñ´æÔÚ
+	 * åˆ¤æ–­ç¼“å­˜æ˜¯å¦å­˜åœ¨
 	 * @param cachefile
 	 * @return
 	 */
@@ -227,7 +227,7 @@ public class AppContext extends Application{
 	}
 	
 	/**
-	 * »ñÈ¡App°²×°°üĞÅÏ¢
+	 * è·å–Appå®‰è£…åŒ…ä¿¡æ¯
 	 * @return
 	 */
 	public PackageInfo getPackageInfo() {

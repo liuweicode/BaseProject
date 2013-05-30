@@ -8,21 +8,21 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 
 /** 
- * ÃèÊö£ºÓ¦ÓÃ³ÌĞò³£Á¿
+ * æè¿°ï¼šåº”ç”¨ç¨‹åºå¸¸é‡
  *
- * ×÷Õß: Liu wei
+ * ä½œè€…: Liu wei
  * 
- * ÓÊÏä£ºi@liuwei.co
+ * é‚®ç®±ï¼ši@liuwei.co
  * 
- * ´´½¨Ê±¼ä: 2013-1-16
+ * åˆ›å»ºæ—¶é—´: 2013-1-16
  */
 public abstract class AppConstants {
 
-	public static final int PAGE_SIZE = 20;//Ä¬ÈÏ·ÖÒ³´óĞ¡
+	public static final int PAGE_SIZE = 20;//é»˜è®¤åˆ†é¡µå¤§å°
 	
-	public static String WY_UPDATE_APK_PATH = "/WY/Update/";//Èí¼ş¸üĞÂÄ¬ÈÏ±£´æÄ¿Â¼
+	public static String WY_UPDATE_APK_PATH = "/WY/Update/";//è½¯ä»¶æ›´æ–°é»˜è®¤ä¿å­˜ç›®å½•
 	
-	public static String WY_LOG_PATH = "/WY/Log/";//ÈÕÖ¾Ä¬ÈÏ±£´æÄ¿Â¼
+	public static String WY_LOG_PATH = "/WY/Log/";//æ—¥å¿—é»˜è®¤ä¿å­˜ç›®å½•
 	
 	static{
 		try {
@@ -33,17 +33,17 @@ public abstract class AppConstants {
 			if(StringUtils.isNotBlank(updatePath) && (!"null".equals(updatePath))){
 				WY_UPDATE_APK_PATH = updatePath;
 			}else{
-				AppToast.makeText(AppContext.getContext(), "ÇëÔÚAndroidManifest.xmlÎÄ¼şÅäÖÃÈí¼ş¸üĞÂÏÂÔØÄ¿Â¼£¡", AppToast.SOUND_ERROR).show();
+				AppToast.makeText(AppContext.getContext(), "è¯·åœ¨AndroidManifest.xmlæ–‡ä»¶é…ç½®è½¯ä»¶æ›´æ–°ä¸‹è½½ç›®å½•ï¼", AppToast.SOUND_ERROR).show();
 			}
 			if(StringUtils.isNotBlank(logPath) && (!"null".equals(logPath))){
 				WY_LOG_PATH = logPath;
 			}else{
-				AppToast.makeText(AppContext.getContext(), "ÇëÔÚAndroidManifest.xmlÎÄ¼şÅäÖÃÈÕÖ¾±£´æÄ¿Â¼£¡", AppToast.SOUND_ERROR).show();
+				AppToast.makeText(AppContext.getContext(), "è¯·åœ¨AndroidManifest.xmlæ–‡ä»¶é…ç½®æ—¥å¿—ä¿å­˜ç›®å½•ï¼", AppToast.SOUND_ERROR).show();
 			}
-			System.out.println("Èí¼ş¸üĞÂÏÂÔØÄ¿Â¼:"+WY_UPDATE_APK_PATH);
-			System.out.println("ÈÕÖ¾±£´æÄ¿Â¼:"+WY_LOG_PATH);
+			System.out.println("è½¯ä»¶æ›´æ–°ä¸‹è½½ç›®å½•:"+WY_UPDATE_APK_PATH);
+			System.out.println("æ—¥å¿—ä¿å­˜ç›®å½•:"+WY_LOG_PATH);
 		} catch (NameNotFoundException e) {
-			AppToast.makeText(AppContext.getContext(), "ÇëÔÚAndroidManifest.xmlÎÄ¼şÅäÖÃÄ¿Â¼ĞÅÏ¢£¡", AppToast.SOUND_ERROR).show();
+			AppToast.makeText(AppContext.getContext(), "è¯·åœ¨AndroidManifest.xmlæ–‡ä»¶é…ç½®ç›®å½•ä¿¡æ¯ï¼", AppToast.SOUND_ERROR).show();
 		}
 		
 	}

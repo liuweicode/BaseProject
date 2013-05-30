@@ -1,13 +1,13 @@
 package com.wy.ui;
 
 /** 
- * ÃèÊö£ºActivity¹«¹²½Ó¿Ú
+ * æè¿°ï¼šActivityå…¬å…±æ¥å£
  *
- * ×÷Õß: Liu wei
+ * ä½œè€…: Liu wei
  * 
- * ÓÊÏä£ºi@liuwei.co
+ * é‚®ç®±ï¼ši@liuwei.co
  * 
- * ´´½¨Ê±¼ä: 2013-1-16
+ * åˆ›å»ºæ—¶é—´: 2013-1-16
  */
 public interface IBaseActivity extends IActivity{
 	

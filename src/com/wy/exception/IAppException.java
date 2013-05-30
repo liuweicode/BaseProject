@@ -2,13 +2,13 @@ package com.wy.exception;
 
 
 /** 
- * ÃèÊö£ºÒì³£Àà½Ó¿Ú
+ * æè¿°ï¼šå¼‚å¸¸ç±»æ¥å£
  *
- * ×÷Õß: Liu wei
+ * ä½œè€…: Liu wei
  * 
- * ÓÊÏä£ºi@liuwei.co
+ * é‚®ç®±ï¼ši@liuwei.co
  * 
- * ´´½¨Ê±¼ä: 2013-1-30
+ * åˆ›å»ºæ—¶é—´: 2013-1-30
  */
 public interface IAppException {
 	

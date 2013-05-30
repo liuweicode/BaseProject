@@ -4,13 +4,13 @@ import com.wy.bean.Update;
 
 
 /** 
- * ÃèÊö£º¿Í»§¶ËÇëÇó½Ó¿Ú
+ * æè¿°ï¼šå®¢æˆ·ç«¯è¯·æ±‚æ¥å£
  *
- * ×÷Õß: Liu wei
+ * ä½œè€…: Liu wei
  * 
- * ÓÊÏä£ºi@liuwei.co
+ * é‚®ç®±ï¼ši@liuwei.co
  * 
- * ´´½¨Ê±¼ä: 2013-1-30
+ * åˆ›å»ºæ—¶é—´: 2013-1-30
  */
 public interface IJsonAppClient {
 	
@@ -18,7 +18,7 @@ public interface IJsonAppClient {
 	public void setHost();
 	
 	/**
-	 * °æ±¾¸üĞÂ
+	 * ç‰ˆæœ¬æ›´æ–°
 	 * 
 	 * @return
 	 * @throws Exception

@@ -1,25 +1,25 @@
 package com.wy.bean;
 
 /** 
- * ÃèÊö£º°æ±¾¸üĞÂ
+ * æè¿°ï¼šç‰ˆæœ¬æ›´æ–°
  *
- * ×÷Õß: Liu wei
+ * ä½œè€…: Liu wei
  * 
- * ÓÊÏä£ºi@liuwei.co
+ * é‚®ç®±ï¼ši@liuwei.co
  * 
- * ´´½¨Ê±¼ä: 2013-1-29
+ * åˆ›å»ºæ—¶é—´: 2013-1-29
  */
 public class Update{
 
-	protected int versionCode;//°æ±¾ºÅ
+	protected int versionCode;//ç‰ˆæœ¬å·
 	
-	protected String versionName;//°æ±¾Ãû³Æ
+	protected String versionName;//ç‰ˆæœ¬åç§°
 	
-	protected String downloadURL;//ÏÂÔØµØÖ·
+	protected String downloadURL;//ä¸‹è½½åœ°å€
 	
-	protected String publishTime;//·¢²¼Ê±¼ä
+	protected String publishTime;//å‘å¸ƒæ—¶é—´
 	
-	protected String versionDesc;//°æ±¾ÃèÊö
+	protected String versionDesc;//ç‰ˆæœ¬æè¿°
 
 	public int getVersionCode() {
 		return versionCode;

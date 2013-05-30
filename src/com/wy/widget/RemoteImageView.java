@@ -19,13 +19,13 @@ import android.widget.ListView;
 import com.wy.AppContext;
 
 /** 
- * ÃèÊö£º
+ * æè¿°ï¼š
  *
- * ×÷Õß: Liu wei
+ * ä½œè€…: Liu wei
  * 
- * ÓÊÏä£ºi@liuwei.co
+ * é‚®ç®±ï¼ši@liuwei.co
  * 
- * ´´½¨Ê±¼ä: 2013-5-29
+ * åˆ›å»ºæ—¶é—´: 2013-5-29
  */
 public class RemoteImageView extends ImageView{
 	

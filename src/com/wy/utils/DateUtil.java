@@ -6,13 +6,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /** 
- * ÃèÊö£º
+ * æè¿°ï¼š
  *
- * ×÷Õß: Liu wei
+ * ä½œè€…: Liu wei
  * 
- * ÓÊÏä£ºi@liuwei.co
+ * é‚®ç®±ï¼ši@liuwei.co
  * 
- * ´´½¨Ê±¼ä: 2013-2-26
+ * åˆ›å»ºæ—¶é—´: 2013-2-26
  */
 public class DateUtil {
 	/**
@@ -61,7 +61,7 @@ public class DateUtil {
 	
 	/**
 	 * 
-	 * @param dateStr  dateStr £º2011-16-45 02:30:11 
+	 * @param dateStr  dateStr ï¼š2011-16-45 02:30:11 
 	 * @return
 	 */
 	public static Date timeStr2date(String dateStr){
@@ -72,7 +72,7 @@ public class DateUtil {
 	
 	/**
 	 * 
-	 * @param dateStr  dateStr £º2011-16-45 02:30:11 
+	 * @param dateStr  dateStr ï¼š2011-16-45 02:30:11 
 	 * @return
 	 */
 	public static Calendar timeStr2calendar( String dateStr){
@@ -97,9 +97,9 @@ public class DateUtil {
 	}
 	
 	/**
-	 * ¼ì²é´«Èë×Ö·û´®ÊÇ·ñÎª¹æ¶¨¸ñÊ½  £º2011-16-45 02:30:11
-	 * @param timeStr ±»¼ì²é×Ö·û´®
-	 * @return boolean ÊÇ£ºtrue£¬ ²»ÊÇ£ºfalse
+	 * æ£€æŸ¥ä¼ å…¥å­—ç¬¦ä¸²æ˜¯å¦ä¸ºè§„å®šæ ¼å¼  ï¼š2011-16-45 02:30:11
+	 * @param timeStr è¢«æ£€æŸ¥å­—ç¬¦ä¸²
+	 * @return boolean æ˜¯ï¼štrueï¼Œ ä¸æ˜¯ï¼šfalse
 	 */
 	public static boolean isTimeStr( String timeStr ){
 		
@@ -137,7 +137,7 @@ public class DateUtil {
 	
 	
 	/**
-	 * // ½«µ¼ÈëÄ¿±êÄ¿Â¼Ãû³Æ 2011-01-06-05-40-56 ×ª»»ÎªSQLiteÖĞÖ§³ÖÊ±¼ä¸ñÊ½   2008-01-03 21:54:06
+	 * // å°†å¯¼å…¥ç›®æ ‡ç›®å½•åç§° 2011-01-06-05-40-56 è½¬æ¢ä¸ºSQLiteä¸­æ”¯æŒæ—¶é—´æ ¼å¼   2008-01-03 21:54:06
 	 * @param importStr    2011-01-06-05-40-56
 	 * @return  String   2008-01-03 21:54:06
 	 */
@@ -151,7 +151,7 @@ public class DateUtil {
 	}
 	
 	/**
-	 * ½«Ê±¼ä¸ñÊ½µÄ×Ö·û´®  2008-01-03 21:54:06 ×ª»»ÎªÎÄ¼şÏµÍ³Ö§³ÖµÄ±íÏÖĞÎÊ½ 2011-01-06-05-40-56
+	 * å°†æ—¶é—´æ ¼å¼çš„å­—ç¬¦ä¸²  2008-01-03 21:54:06 è½¬æ¢ä¸ºæ–‡ä»¶ç³»ç»Ÿæ”¯æŒçš„è¡¨ç°å½¢å¼ 2011-01-06-05-40-56
 	 * @param timeStr    2008-01-03 21:54:06
 	 * @return  String   2011-01-06-05-40-56
 	 */

@@ -25,27 +25,27 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 /**
- * ÃèÊö£º¿Í»§¶ËÇëÇó·â×°
+ * æè¿°ï¼šå®¢æˆ·ç«¯è¯·æ±‚å°è£…
  * 
- * ×÷Õß: Liu wei
+ * ä½œè€…: Liu wei
  * 
- * ÓÊÏä£ºi@liuwei.co
+ * é‚®ç®±ï¼ši@liuwei.co
  * 
- * ´´½¨Ê±¼ä: 2013-1-30
+ * åˆ›å»ºæ—¶é—´: 2013-1-30
  */
 public abstract class AppClient implements IAppClient{
 
-	/*»º´æÊ§Ğ§Ê±¼ä*/
+	/*ç¼“å­˜å¤±æ•ˆæ—¶é—´*/
 	public static final int CACHE_TIME = 60*60000;
-	/*´ÓÁ¬½Ó³ØÖĞÈ¡Á¬½ÓµÄ³¬Ê±Ê±¼ä*/
+	/*ä»è¿æ¥æ± ä¸­å–è¿æ¥çš„è¶…æ—¶æ—¶é—´*/
 	public final static int TIMEOUT = 1000;
-	/*Á¬½Ó³¬Ê±Ê±¼ä*/
+	/*è¿æ¥è¶…æ—¶æ—¶é—´*/
 	public final static int TIMEOUT_CONNECTION = 20000;//60*1000;
-	/*ÇëÇó³¬Ê±*/
+	/*è¯·æ±‚è¶…æ—¶*/
 	public final static int TIMEOUT_SOCKET = 20000;//60*1000;
-	/*ÖØÊÔ´ÎÊı*/
+	/*é‡è¯•æ¬¡æ•°*/
 	public final static int RETRY_TIME = 3;
-	/*×Ö·û±àÂë*/
+	/*å­—ç¬¦ç¼–ç */
 	protected final static String UTF_8 = "UTF-8";
 	
 	protected AppClient() {
@@ -53,26 +53,26 @@ public abstract class AppClient implements IAppClient{
 
 	protected HttpClient getHttpClient() {
 		HttpClient httpClient = new HttpClient();
-		// ÉèÖÃ HttpClient ½ÓÊÕ Cookie,ÓÃÓëä¯ÀÀÆ÷Ò»ÑùµÄ²ßÂÔ
+		// è®¾ç½® HttpClient æ¥æ”¶ Cookie,ç”¨ä¸æµè§ˆå™¨ä¸€æ ·çš„ç­–ç•¥
 		httpClient.getParams().setCookiePolicy(
 				CookiePolicy.BROWSER_COMPATIBILITY);
-		// ÉèÖÃ Ä¬ÈÏµÄ³¬Ê±ÖØÊÔ´¦Àí²ßÂÔ
+		// è®¾ç½® é»˜è®¤çš„è¶…æ—¶é‡è¯•å¤„ç†ç­–ç•¥
 		httpClient.getParams().setParameter(HttpMethodParams.RETRY_HANDLER,
 				new DefaultHttpMethodRetryHandler());
-		// ÉèÖÃ Á¬½Ó³¬Ê±Ê±¼ä
+		// è®¾ç½® è¿æ¥è¶…æ—¶æ—¶é—´
 		httpClient.getHttpConnectionManager().getParams()
 				.setConnectionTimeout(TIMEOUT_CONNECTION);
-		// ÉèÖÃ ¶ÁÊı¾İ³¬Ê±Ê±¼ä
+		// è®¾ç½® è¯»æ•°æ®è¶…æ—¶æ—¶é—´
 		httpClient.getHttpConnectionManager().getParams()
 				.setSoTimeout(TIMEOUT_SOCKET);
-		// ÉèÖÃ ×Ö·û¼¯
+		// è®¾ç½® å­—ç¬¦é›†
 		httpClient.getParams().setContentCharset(UTF_8);
 		return httpClient;
 	}
 
 	protected GetMethod getHttpGet(String url) {
 		GetMethod httpGet = new GetMethod(url);
-		// ÉèÖÃ ÇëÇó³¬Ê±Ê±¼ä
+		// è®¾ç½® è¯·æ±‚è¶…æ—¶æ—¶é—´
 		httpGet.getParams().setSoTimeout(TIMEOUT_SOCKET);
 		httpGet.setRequestHeader("Host", getHost());
 		httpGet.setRequestHeader("Connection", "Keep-Alive");
@@ -81,7 +81,7 @@ public abstract class AppClient implements IAppClient{
 
 	protected PostMethod getHttpPost(String url) {
 		PostMethod httpPost = new PostMethod(url);
-		// ÉèÖÃ ÇëÇó³¬Ê±Ê±¼ä
+		// è®¾ç½® è¯·æ±‚è¶…æ—¶æ—¶é—´
 		httpPost.getParams().setSoTimeout(TIMEOUT_SOCKET);
 		httpPost.setRequestHeader("Host", getHost());
 		httpPost.setRequestHeader("Connection", "Keep-Alive");
@@ -99,7 +99,7 @@ public abstract class AppClient implements IAppClient{
 				url.append(name);
 				url.append('=');
 				url.append(String.valueOf(params.get(name)));
-				// ²»×öURLEncoder´¦Àí
+				// ä¸åšURLEncoderå¤„ç†
 				// url.append(URLEncoder.encode(String.valueOf(params.get(name)),
 				// UTF_8));
 			}
@@ -108,7 +108,7 @@ public abstract class AppClient implements IAppClient{
 	}
 
 	/**
-	 * getÇëÇóURL
+	 * getè¯·æ±‚URL
 	 * 
 	 * @param url
 	 * @throws Exception
@@ -126,7 +126,7 @@ public abstract class AppClient implements IAppClient{
 				httpGet = getHttpGet(url);
 				int statusCode = httpClient.executeMethod(httpGet);
 				if (statusCode != HttpStatus.SC_OK) {
-					throw new HttpException("ÇëÇó["+url+"]Ê§°Ü,ÍøÂç´íÎó£¬ÏìÓ¦Âë statusCode = " + statusCode);
+					throw new HttpException("è¯·æ±‚["+url+"]å¤±è´¥,ç½‘ç»œé”™è¯¯ï¼Œå“åº”ç  statusCode = " + statusCode);
 				}
 				responseBody = httpGet.getResponseBodyAsString();
 				System.out.println("XMLDATA=====>"+responseBody);
@@ -140,8 +140,8 @@ public abstract class AppClient implements IAppClient{
 					}
 					continue;
 				}
-				// ·¢ÉúÖÂÃüµÄÒì³££¬¿ÉÄÜÊÇĞ­Òé²»¶Ô»òÕß·µ»ØµÄÄÚÈİÓĞÎÊÌâ
-				throw new HttpException("ÇëÇó["+url+"]Ê§°Ü,´íÎóĞÅÏ¢£º"+e.getMessage());
+				// å‘ç”Ÿè‡´å‘½çš„å¼‚å¸¸ï¼Œå¯èƒ½æ˜¯åè®®ä¸å¯¹æˆ–è€…è¿”å›çš„å†…å®¹æœ‰é—®é¢˜
+				throw new HttpException("è¯·æ±‚["+url+"]å¤±è´¥,é”™è¯¯ä¿¡æ¯ï¼š"+e.getMessage());
 			} catch (IOException e) {
 				time++;
 				if (time < RETRY_TIME) {
@@ -151,10 +151,10 @@ public abstract class AppClient implements IAppClient{
 					}
 					continue;
 				}
-				// ·¢ÉúÍøÂçÒì³£
-				throw new IOException("ÇëÇó["+url+"]Ê§°Ü,´íÎóĞÅÏ¢£º"+e.getMessage());
+				// å‘ç”Ÿç½‘ç»œå¼‚å¸¸
+				throw new IOException("è¯·æ±‚["+url+"]å¤±è´¥,é”™è¯¯ä¿¡æ¯ï¼š"+e.getMessage());
 			} finally {
-				// ÊÍ·ÅÁ¬½Ó
+				// é‡Šæ”¾è¿æ¥
 				if (httpGet != null) {
 					httpGet.releaseConnection();
 					httpClient = null;
@@ -166,7 +166,7 @@ public abstract class AppClient implements IAppClient{
 	}
 
 	/**
-	 * ¹«ÓÃpost·½·¨
+	 * å…¬ç”¨postæ–¹æ³•
 	 * 
 	 * @param url
 	 * @param params
@@ -183,7 +183,7 @@ public abstract class AppClient implements IAppClient{
 		HttpClient httpClient = null;
 		PostMethod httpPost = null;
 
-		// post±íµ¥²ÎÊı´¦Àí
+		// postè¡¨å•å‚æ•°å¤„ç†
 		int length = (params == null ? 0 : params.size())
 				+ (files == null ? 0 : files.size());
 		Part[] parts = new Part[length];
@@ -212,7 +212,7 @@ public abstract class AppClient implements IAppClient{
 				httpPost.setRequestEntity(new MultipartRequestEntity(parts,httpPost.getParams()));
 				int statusCode = httpClient.executeMethod(httpPost);
 				if (statusCode != HttpStatus.SC_OK) {
-					throw new HttpException("ÇëÇóURL:"+url+" ²ÎÊı£º"+params+"Ê§°Ü,ÍøÂç´íÎó£¬ÏìÓ¦Âë statusCode = " + statusCode);
+					throw new HttpException("è¯·æ±‚URL:"+url+" å‚æ•°ï¼š"+params+"å¤±è´¥,ç½‘ç»œé”™è¯¯ï¼Œå“åº”ç  statusCode = " + statusCode);
 				}
 				responseBody = httpPost.getResponseBodyAsString();
 				System.out.println("XMLDATA=====>" + responseBody);
@@ -226,8 +226,8 @@ public abstract class AppClient implements IAppClient{
 					}
 					continue;
 				}
-				// ·¢ÉúÖÂÃüµÄÒì³££¬¿ÉÄÜÊÇĞ­Òé²»¶Ô»òÕß·µ»ØµÄÄÚÈİÓĞÎÊÌâ
-				throw new HttpException("ÇëÇóURL:"+url+" ²ÎÊı£º"+params+"Ê§°Ü,´íÎóĞÅÏ¢£º"+e.getMessage());
+				// å‘ç”Ÿè‡´å‘½çš„å¼‚å¸¸ï¼Œå¯èƒ½æ˜¯åè®®ä¸å¯¹æˆ–è€…è¿”å›çš„å†…å®¹æœ‰é—®é¢˜
+				throw new HttpException("è¯·æ±‚URL:"+url+" å‚æ•°ï¼š"+params+"å¤±è´¥,é”™è¯¯ä¿¡æ¯ï¼š"+e.getMessage());
 			} catch (IOException e) {
 				time++;
 				if (time < RETRY_TIME) {
@@ -237,10 +237,10 @@ public abstract class AppClient implements IAppClient{
 					}
 					continue;
 				}
-				// ·¢ÉúÍøÂçÒì³£
-				throw new IOException("ÇëÇóURL:"+url+" ²ÎÊı£º"+params+"Ê§°Ü,´íÎóĞÅÏ¢£º"+e.getMessage());
+				// å‘ç”Ÿç½‘ç»œå¼‚å¸¸
+				throw new IOException("è¯·æ±‚URL:"+url+" å‚æ•°ï¼š"+params+"å¤±è´¥,é”™è¯¯ä¿¡æ¯ï¼š"+e.getMessage());
 			} finally {
-				// ÊÍ·ÅÁ¬½Ó
+				// é‡Šæ”¾è¿æ¥
 				httpPost.releaseConnection();
 				httpClient = null;
 			}
@@ -250,7 +250,7 @@ public abstract class AppClient implements IAppClient{
 	}
 
 	/**
-	 * »ñÈ¡ÍøÂçÍ¼Æ¬
+	 * è·å–ç½‘ç»œå›¾ç‰‡
 	 * 
 	 * @param url
 	 * @return
@@ -269,7 +269,7 @@ public abstract class AppClient implements IAppClient{
 				httpGet = getHttpGet(url);
 				int statusCode = httpClient.executeMethod(httpGet);
 				if (statusCode != HttpStatus.SC_OK) {
-					throw new HttpException("»ñÈ¡Í¼Æ¬["+url+"]Ê§°Ü,ÍøÂç´íÎó£¬ÏìÓ¦Âë statusCode = " + statusCode);
+					throw new HttpException("è·å–å›¾ç‰‡["+url+"]å¤±è´¥,ç½‘ç»œé”™è¯¯ï¼Œå“åº”ç  statusCode = " + statusCode);
 				}
 				InputStream inStream = httpGet.getResponseBodyAsStream();
 				bitmap = BitmapFactory.decodeStream(inStream);
@@ -284,8 +284,8 @@ public abstract class AppClient implements IAppClient{
 					}
 					continue;
 				}
-				// ·¢ÉúÖÂÃüµÄÒì³££¬¿ÉÄÜÊÇĞ­Òé²»¶Ô»òÕß·µ»ØµÄÄÚÈİÓĞÎÊÌâ
-				throw new HttpException("»ñÈ¡Í¼Æ¬["+url+"]Ê§°Ü,´íÎóĞÅÏ¢£º"+e.getMessage());
+				// å‘ç”Ÿè‡´å‘½çš„å¼‚å¸¸ï¼Œå¯èƒ½æ˜¯åè®®ä¸å¯¹æˆ–è€…è¿”å›çš„å†…å®¹æœ‰é—®é¢˜
+				throw new HttpException("è·å–å›¾ç‰‡["+url+"]å¤±è´¥,é”™è¯¯ä¿¡æ¯ï¼š"+e.getMessage());
 			} catch (IOException e) {
 				time++;
 				if (time < RETRY_TIME) {
@@ -295,10 +295,10 @@ public abstract class AppClient implements IAppClient{
 					}
 					continue;
 				}
-				// ·¢ÉúÍøÂçÒì³£
-				throw new IOException("»ñÈ¡Í¼Æ¬["+url+"]Ê§°Ü,´íÎóĞÅÏ¢£º"+e.getMessage());
+				// å‘ç”Ÿç½‘ç»œå¼‚å¸¸
+				throw new IOException("è·å–å›¾ç‰‡["+url+"]å¤±è´¥,é”™è¯¯ä¿¡æ¯ï¼š"+e.getMessage());
 			} finally {
-				// ÊÍ·ÅÁ¬½Ó
+				// é‡Šæ”¾è¿æ¥
 				httpGet.releaseConnection();
 				httpClient = null;
 			}

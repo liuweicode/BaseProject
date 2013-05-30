@@ -5,13 +5,13 @@ import java.io.InputStream;
 import com.thoughtworks.xstream.mapper.CannotResolveClassException;
 
 /** 
- * ÃèÊö£º¹¹½¨ÊµÌå¶ÔÏó
+ * æè¿°ï¼šæ„å»ºå®ä½“å¯¹è±¡
  *
- * ×÷Õß: Liu wei
+ * ä½œè€…: Liu wei
  * 
- * ÓÊÏä£ºi@liuwei.co
+ * é‚®ç®±ï¼ši@liuwei.co
  * 
- * ´´½¨Ê±¼ä: 2013-5-30
+ * åˆ›å»ºæ—¶é—´: 2013-5-30
  */
 public abstract class XMLBuilder<T> {
 

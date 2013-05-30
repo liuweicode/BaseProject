@@ -19,13 +19,13 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 /** 
- * ÃèÊö£ºÓÊ¼ş·¢ËÍ²Ù×÷Àà
+ * æè¿°ï¼šé‚®ä»¶å‘é€æ“ä½œç±»
  *
- * ×÷Õß: Liu wei
+ * ä½œè€…: Liu wei
  * 
- * ÓÊÏä£ºi@liuwei.co
+ * é‚®ç®±ï¼ši@liuwei.co
  * 
- * ´´½¨Ê±¼ä: 2013-2-26
+ * åˆ›å»ºæ—¶é—´: 2013-2-26
  */
 public class Mail extends javax.mail.Authenticator{
 	private String _user;
@@ -253,5 +253,5 @@ public class Mail extends javax.mail.Authenticator{
 		this._multipart = _multipart;
 	}
 
-	// more of the getters and setters ¡­..
+	// more of the getters and setters â€¦..
 }

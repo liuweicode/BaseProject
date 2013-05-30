@@ -11,20 +11,20 @@ import java.util.Date;
 import android.os.Environment;
 
 /** 
- * ÃèÊö£ºÓ¦ÓÃ³ÌĞòÒì³£Àà£ºÓÃÓÚ²¶»ñÒì³£ºÍÌáÊ¾´íÎóĞÅÏ¢
+ * æè¿°ï¼šåº”ç”¨ç¨‹åºå¼‚å¸¸ç±»ï¼šç”¨äºæ•è·å¼‚å¸¸å’Œæç¤ºé”™è¯¯ä¿¡æ¯
  *
- * ×÷Õß: Liu wei
+ * ä½œè€…: Liu wei
  * 
- * ÓÊÏä£ºi@liuwei.co
+ * é‚®ç®±ï¼ši@liuwei.co
  * 
- * ´´½¨Ê±¼ä: 2013-1-16
+ * åˆ›å»ºæ—¶é—´: 2013-1-16
  */
 public abstract class AppException extends Exception implements IAppException{
 	
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * ±£´æÒì³£ÈÕÖ¾
+	 * ä¿å­˜å¼‚å¸¸æ—¥å¿—
 	 * @param excp
 	 */
 	public void saveErrorLog(Exception excp,String savePath) {
@@ -33,7 +33,7 @@ public abstract class AppException extends Exception implements IAppException{
 		FileWriter fw = null;
 		PrintWriter pw = null;
 		try {
-			//ÅĞ¶ÏÊÇ·ñ¹ÒÔØÁËSD¿¨
+			//åˆ¤æ–­æ˜¯å¦æŒ‚è½½äº†SDå¡
 			String storageState = Environment.getExternalStorageState();		
 			if(storageState.equals(Environment.MEDIA_MOUNTED)){
 				File file = new File(savePath);
@@ -42,7 +42,7 @@ public abstract class AppException extends Exception implements IAppException{
 				}
 				logFilePath = savePath + errorlog;
 			}
-			//Ã»ÓĞ¹ÒÔØSD¿¨£¬ÎŞ·¨Ğ´ÎÄ¼ş
+			//æ²¡æœ‰æŒ‚è½½SDå¡ï¼Œæ— æ³•å†™æ–‡ä»¶
 			if(logFilePath == ""){
 				return;
 			}

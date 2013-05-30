@@ -38,13 +38,13 @@ import com.wy.common.client.IJsonAppClient;
 import com.wy.common.client.IXmlAppClient;
 
 /** 
- * ÃèÊö£ºApp¸üĞÂ¹ÜÀíÀà
+ * æè¿°ï¼šAppæ›´æ–°ç®¡ç†ç±»
  *
- * ×÷Õß: Liu wei
+ * ä½œè€…: Liu wei
  * 
- * ÓÊÏä£ºi@liuwei.co
+ * é‚®ç®±ï¼ši@liuwei.co
  * 
- * ´´½¨Ê±¼ä: 2013-1-29
+ * åˆ›å»ºæ—¶é—´: 2013-1-29
  */
 public class UpdateManager {
 
@@ -58,37 +58,37 @@ public class UpdateManager {
 	private static UpdateManager updateManager;
 	
 	private Context mContext;
-	//Í¨Öª¶Ô»°¿ò
+	//é€šçŸ¥å¯¹è¯æ¡†
 	private Dialog noticeDialog;
-	//ÏÂÔØ¶Ô»°¿ò
+	//ä¸‹è½½å¯¹è¯æ¡†
 	private Dialog downloadDialog;
-	//'ÒÑ¾­ÊÇ×îĞÂ' »òÕß 'ÎŞ·¨»ñÈ¡×îĞÂ°æ±¾' µÄ¶Ô»°¿ò
+	//'å·²ç»æ˜¯æœ€æ–°' æˆ–è€… 'æ— æ³•è·å–æœ€æ–°ç‰ˆæœ¬' çš„å¯¹è¯æ¡†
 	private Dialog latestOrFailDialog;
-    //½ø¶ÈÌõ
+    //è¿›åº¦æ¡
     private ProgressBar mProgress;
-    //ÏÔÊ¾ÏÂÔØÊıÖµ
+    //æ˜¾ç¤ºä¸‹è½½æ•°å€¼
     private TextView mProgressText;
-    //²éÑ¯¶¯»­
+    //æŸ¥è¯¢åŠ¨ç”»
     private ProgressDialog mProDialog;
-    //½ø¶ÈÖµ
+    //è¿›åº¦å€¼
     private int progress;
-    //ÏÂÔØÏß³Ì
+    //ä¸‹è½½çº¿ç¨‹
     private Thread downLoadThread;
-    //ÖÕÖ¹±ê¼Ç
+    //ç»ˆæ­¢æ ‡è®°
     private boolean interceptFlag;
-	//ÌáÊ¾Óï
+	//æç¤ºè¯­
 	private String updateMsg = "";
-	//·µ»ØµÄ°²×°°üurl
+	//è¿”å›çš„å®‰è£…åŒ…url
 	private String apkUrl = "";
-	//ÏÂÔØ°ü±£´æÂ·¾¶
+	//ä¸‹è½½åŒ…ä¿å­˜è·¯å¾„
     private String savePath = "";
-	//apk±£´æÍêÕûÂ·¾¶
+	//apkä¿å­˜å®Œæ•´è·¯å¾„
 	private String apkFilePath = "";
-	//ÁÙÊ±ÏÂÔØÎÄ¼şÂ·¾¶
+	//ä¸´æ—¶ä¸‹è½½æ–‡ä»¶è·¯å¾„
 	private String tmpFilePath = "";
-	//ÏÂÔØÎÄ¼ş´óĞ¡
+	//ä¸‹è½½æ–‡ä»¶å¤§å°
 	private String apkFileSize;
-	//ÒÑÏÂÔØÎÄ¼ş´óĞ¡
+	//å·²ä¸‹è½½æ–‡ä»¶å¤§å°
 	private String tmpFileSize;
 	
 	private Update mUpdate;
@@ -106,7 +106,7 @@ public class UpdateManager {
 				break;
 			case DOWN_NOSDCARD:
 				downloadDialog.dismiss();
-				Toast.makeText(mContext, "ÎŞ·¨ÏÂÔØ°²×°ÎÄ¼ş£¬Çë¼ì²éSD¿¨ÊÇ·ñ¹ÒÔØ", 3000).show();
+				Toast.makeText(mContext, "æ— æ³•ä¸‹è½½å®‰è£…æ–‡ä»¶ï¼Œè¯·æ£€æŸ¥SDå¡æ˜¯å¦æŒ‚è½½", 3000).show();
 				break;
 			}
     	};
@@ -121,35 +121,35 @@ public class UpdateManager {
 	}
 	
 	/**
-	 * ¼ì²éApp¸üĞÂ
+	 * æ£€æŸ¥Appæ›´æ–°
 	 * @param context
-	 * @param isShowMsg ÊÇ·ñÏÔÊ¾ÌáÊ¾ÏûÏ¢
+	 * @param isShowMsg æ˜¯å¦æ˜¾ç¤ºæç¤ºæ¶ˆæ¯
 	 */
 	public void checkAppUpdate(final Context context, final boolean isShowMsg,final IXmlAppClient client){
 		this.mContext = context;
 		if(isShowMsg){
 			if(mProDialog == null)
-				mProDialog = ProgressDialog.show(mContext, null, "ÕıÔÚ¼ì²â£¬ÇëÉÔºó...", true, true);
+				mProDialog = ProgressDialog.show(mContext, null, "æ­£åœ¨æ£€æµ‹ï¼Œè¯·ç¨å...", true, true);
 			else if(mProDialog.isShowing() || (latestOrFailDialog!=null && latestOrFailDialog.isShowing()))
 				return;
 		}
 		final Handler handler = new Handler(){
 			public void handleMessage(Message msg) {
-				//½ø¶ÈÌõ¶Ô»°¿ò²»ÏÔÊ¾ - ¼ì²â½á¹ûÒ²²»ÏÔÊ¾
+				//è¿›åº¦æ¡å¯¹è¯æ¡†ä¸æ˜¾ç¤º - æ£€æµ‹ç»“æœä¹Ÿä¸æ˜¾ç¤º
 				if(mProDialog != null && !mProDialog.isShowing()){
 					return;
 				}
-				//¹Ø±Õ²¢ÊÍ·ÅÊÍ·Å½ø¶ÈÌõ¶Ô»°¿ò
+				//å…³é—­å¹¶é‡Šæ”¾é‡Šæ”¾è¿›åº¦æ¡å¯¹è¯æ¡†
 				if(isShowMsg && mProDialog != null){
 					mProDialog.dismiss();
 					mProDialog = null;
 				}
-				//ÏÔÊ¾¼ì²â½á¹û
+				//æ˜¾ç¤ºæ£€æµ‹ç»“æœ
 				if(msg.what == 1){
 					mUpdate = (Update)msg.obj;
 					if(mUpdate != null){
 						int curVersionCode = -1;
-						//»ñÈ¡µ±Ç°°æ±¾ºÅ
+						//è·å–å½“å‰ç‰ˆæœ¬å·
 						try {
 							PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_CONFIGURATIONS);
 							curVersionCode = packageInfo.versionCode;
@@ -186,35 +186,35 @@ public class UpdateManager {
 	}	
 	
 	/**
-	 * ¼ì²éApp¸üĞÂ
+	 * æ£€æŸ¥Appæ›´æ–°
 	 * @param context
-	 * @param isShowMsg ÊÇ·ñÏÔÊ¾ÌáÊ¾ÏûÏ¢
+	 * @param isShowMsg æ˜¯å¦æ˜¾ç¤ºæç¤ºæ¶ˆæ¯
 	 */
 	public void checkAppUpdate(final Context context, final boolean isShowMsg,final IJsonAppClient client){
 		this.mContext = context;
 		if(isShowMsg){
 			if(mProDialog == null)
-				mProDialog = ProgressDialog.show(mContext, null, "ÕıÔÚ¼ì²â£¬ÇëÉÔºó...", true, true);
+				mProDialog = ProgressDialog.show(mContext, null, "æ­£åœ¨æ£€æµ‹ï¼Œè¯·ç¨å...", true, true);
 			else if(mProDialog.isShowing() || (latestOrFailDialog!=null && latestOrFailDialog.isShowing()))
 				return;
 		}
 		final Handler handler = new Handler(){
 			public void handleMessage(Message msg) {
-				//½ø¶ÈÌõ¶Ô»°¿ò²»ÏÔÊ¾ - ¼ì²â½á¹ûÒ²²»ÏÔÊ¾
+				//è¿›åº¦æ¡å¯¹è¯æ¡†ä¸æ˜¾ç¤º - æ£€æµ‹ç»“æœä¹Ÿä¸æ˜¾ç¤º
 				if(mProDialog != null && !mProDialog.isShowing()){
 					return;
 				}
-				//¹Ø±Õ²¢ÊÍ·ÅÊÍ·Å½ø¶ÈÌõ¶Ô»°¿ò
+				//å…³é—­å¹¶é‡Šæ”¾é‡Šæ”¾è¿›åº¦æ¡å¯¹è¯æ¡†
 				if(isShowMsg && mProDialog != null){
 					mProDialog.dismiss();
 					mProDialog = null;
 				}
-				//ÏÔÊ¾¼ì²â½á¹û
+				//æ˜¾ç¤ºæ£€æµ‹ç»“æœ
 				if(msg.what == 1){
 					mUpdate = (Update)msg.obj;
 					if(mUpdate != null){
 						int curVersionCode = -1;
-						//»ñÈ¡µ±Ç°°æ±¾ºÅ
+						//è·å–å½“å‰ç‰ˆæœ¬å·
 						try {
 							PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_CONFIGURATIONS);
 							curVersionCode = packageInfo.versionCode;
@@ -251,32 +251,32 @@ public class UpdateManager {
 	}	
 	
 	/**
-	 * ÏÔÊ¾'ÒÑ¾­ÊÇ×îĞÂ'»òÕß'ÎŞ·¨»ñÈ¡°æ±¾ĞÅÏ¢'¶Ô»°¿ò
+	 * æ˜¾ç¤º'å·²ç»æ˜¯æœ€æ–°'æˆ–è€…'æ— æ³•è·å–ç‰ˆæœ¬ä¿¡æ¯'å¯¹è¯æ¡†
 	 */
 	private void showLatestOrFailDialog(int dialogType) {
 		if (latestOrFailDialog != null) {
-			//¹Ø±Õ²¢ÊÍ·ÅÖ®Ç°µÄ¶Ô»°¿ò
+			//å…³é—­å¹¶é‡Šæ”¾ä¹‹å‰çš„å¯¹è¯æ¡†
 			latestOrFailDialog.dismiss();
 			latestOrFailDialog = null;
 		}
 		AlertDialog.Builder builder = new Builder(mContext);
-		builder.setTitle("ÏµÍ³ÌáÊ¾");
+		builder.setTitle("ç³»ç»Ÿæç¤º");
 		if (dialogType == DIALOG_TYPE_LATEST) {
-			builder.setMessage("Äúµ±Ç°ÒÑ¾­ÊÇ×îĞÂ°æ±¾");
+			builder.setMessage("æ‚¨å½“å‰å·²ç»æ˜¯æœ€æ–°ç‰ˆæœ¬");
 		} else if (dialogType == DIALOG_TYPE_FAIL) {
-			builder.setMessage("ÎŞ·¨»ñÈ¡°æ±¾¸üĞÂĞÅÏ¢");
+			builder.setMessage("æ— æ³•è·å–ç‰ˆæœ¬æ›´æ–°ä¿¡æ¯");
 		}
-		builder.setPositiveButton("È·¶¨", null);
+		builder.setPositiveButton("ç¡®å®š", null);
 		latestOrFailDialog = builder.create();
 		latestOrFailDialog.show();
 	}
 
 	/**
-	 * ÏÔÊ¾°æ±¾¸üĞÂÍ¨Öª¶Ô»°¿ò
+	 * æ˜¾ç¤ºç‰ˆæœ¬æ›´æ–°é€šçŸ¥å¯¹è¯æ¡†
 	 */
 	private void showNoticeDialog(){
 		AlertDialog.Builder builder = new Builder(mContext);
-		builder.setTitle("Èí¼ş°æ±¾¸üĞÂ");
+		builder.setTitle("è½¯ä»¶ç‰ˆæœ¬æ›´æ–°");
 		StringBuffer sb = new StringBuffer();
 		if(updateMsg!=null){
 			String[] updateList = updateMsg.replaceAll("\\\\n", "====").split("====");
@@ -289,14 +289,14 @@ public class UpdateManager {
 			
 		}
 		builder.setMessage(sb.toString());
-		builder.setPositiveButton("Á¢¼´¸üĞÂ", new OnClickListener() {			
+		builder.setPositiveButton("ç«‹å³æ›´æ–°", new OnClickListener() {			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
 				showDownloadDialog();			
 			}
 		});
-		builder.setNegativeButton("ÒÔºóÔÙËµ", new OnClickListener() {			
+		builder.setNegativeButton("ä»¥åå†è¯´", new OnClickListener() {			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();				
@@ -308,11 +308,11 @@ public class UpdateManager {
 	}
 	
 	/**
-	 * ÏÔÊ¾ÏÂÔØ¶Ô»°¿ò
+	 * æ˜¾ç¤ºä¸‹è½½å¯¹è¯æ¡†
 	 */
 	private void showDownloadDialog(){
 		AlertDialog.Builder builder = new Builder(mContext);
-		builder.setTitle("ÕıÔÚÏÂÔØĞÂ°æ±¾");
+		builder.setTitle("æ­£åœ¨ä¸‹è½½æ–°ç‰ˆæœ¬");
 		
 		final LayoutInflater inflater = LayoutInflater.from(mContext);
 		View v = inflater.inflate(R.layout.update_progress, null);
@@ -320,7 +320,7 @@ public class UpdateManager {
 		mProgressText = (TextView) v.findViewById(R.id.update_progress_text);
 		
 		builder.setView(v);
-		builder.setNegativeButton("È¡Ïû", new OnClickListener() {	
+		builder.setNegativeButton("å–æ¶ˆ", new OnClickListener() {	
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
@@ -347,7 +347,7 @@ public class UpdateManager {
 			try {
 				String apkName = "EcookPadApp_"+mUpdate.getVersionName()+".apk";
 				String tmpApk = "EcookPadApp_"+mUpdate.getVersionName()+".tmp";
-				//ÅĞ¶ÏÊÇ·ñ¹ÒÔØÁËSD¿¨
+				//åˆ¤æ–­æ˜¯å¦æŒ‚è½½äº†SDå¡
 				String storageState = Environment.getExternalStorageState();		
 				if(storageState.equals(Environment.MEDIA_MOUNTED)){
 					savePath = Environment.getExternalStorageDirectory().getAbsolutePath() + AppConstants.WY_UPDATE_APK_PATH;
@@ -359,7 +359,7 @@ public class UpdateManager {
 					tmpFilePath = savePath + tmpApk;
 				}
 				
-				//Ã»ÓĞ¹ÒÔØSD¿¨£¬ÎŞ·¨ÏÂÔØÎÄ¼ş
+				//æ²¡æœ‰æŒ‚è½½SDå¡ï¼Œæ— æ³•ä¸‹è½½æ–‡ä»¶
 				if(apkFilePath == null || apkFilePath == ""){
 					mHandler.sendEmptyMessage(DOWN_NOSDCARD);
 					return;
@@ -367,14 +367,14 @@ public class UpdateManager {
 				
 				File ApkFile = new File(apkFilePath);
 				
-				//ÊÇ·ñÒÑÏÂÔØ¸üĞÂÎÄ¼ş
+				//æ˜¯å¦å·²ä¸‹è½½æ›´æ–°æ–‡ä»¶
 				if(ApkFile.exists()){
 					downloadDialog.dismiss();
 					installApk();
 					return;
 				}
 				
-				//Êä³öÁÙÊ±ÏÂÔØÎÄ¼ş
+				//è¾“å‡ºä¸´æ—¶ä¸‹è½½æ–‡ä»¶
 				File tmpFile = new File(tmpFilePath);
 				FileOutputStream fos = new FileOutputStream(tmpFile);
 				
@@ -384,9 +384,9 @@ public class UpdateManager {
 				int length = conn.getContentLength();
 				InputStream is = conn.getInputStream();
 				
-				//ÏÔÊ¾ÎÄ¼ş´óĞ¡¸ñÊ½£º2¸öĞ¡ÊıµãÏÔÊ¾
+				//æ˜¾ç¤ºæ–‡ä»¶å¤§å°æ ¼å¼ï¼š2ä¸ªå°æ•°ç‚¹æ˜¾ç¤º
 		    	DecimalFormat df = new DecimalFormat("0.00");
-		    	//½ø¶ÈÌõÏÂÃæÏÔÊ¾µÄ×ÜÎÄ¼ş´óĞ¡
+		    	//è¿›åº¦æ¡ä¸‹é¢æ˜¾ç¤ºçš„æ€»æ–‡ä»¶å¤§å°
 		    	apkFileSize = df.format((float) length / 1024 / 1024) + "MB";
 				
 				int count = 0;
@@ -395,22 +395,22 @@ public class UpdateManager {
 				do{   		   		
 		    		int numread = is.read(buf);
 		    		count += numread;
-		    		//½ø¶ÈÌõÏÂÃæÏÔÊ¾µÄµ±Ç°ÏÂÔØÎÄ¼ş´óĞ¡
+		    		//è¿›åº¦æ¡ä¸‹é¢æ˜¾ç¤ºçš„å½“å‰ä¸‹è½½æ–‡ä»¶å¤§å°
 		    		tmpFileSize = df.format((float) count / 1024 / 1024) + "MB";
-		    		//µ±Ç°½ø¶ÈÖµ
+		    		//å½“å‰è¿›åº¦å€¼
 		    	    progress =(int)(((float)count / length) * 100);
-		    	    //¸üĞÂ½ø¶È
+		    	    //æ›´æ–°è¿›åº¦
 		    	    mHandler.sendEmptyMessage(DOWN_UPDATE);
 		    		if(numread <= 0){	
-		    			//ÏÂÔØÍê³É - ½«ÁÙÊ±ÏÂÔØÎÄ¼ş×ª³ÉAPKÎÄ¼ş
+		    			//ä¸‹è½½å®Œæˆ - å°†ä¸´æ—¶ä¸‹è½½æ–‡ä»¶è½¬æˆAPKæ–‡ä»¶
 						if(tmpFile.renameTo(ApkFile)){
-							//Í¨Öª°²×°
+							//é€šçŸ¥å®‰è£…
 							mHandler.sendEmptyMessage(DOWN_OVER);
 						}
 		    			break;
 		    		}
 		    		fos.write(buf,0,numread);
-		    	}while(!interceptFlag);//µã»÷È¡Ïû¾ÍÍ£Ö¹ÏÂÔØ
+		    	}while(!interceptFlag);//ç‚¹å‡»å–æ¶ˆå°±åœæ­¢ä¸‹è½½
 				
 				fos.close();
 				is.close();
@@ -424,7 +424,7 @@ public class UpdateManager {
 	};
 	
 	/**
-	 * ÏÂÔØapk	
+	 * ä¸‹è½½apk	
 	 */
 	private void downloadApk(){
 		downLoadThread = new Thread(mdownApkRunnable);
@@ -432,7 +432,7 @@ public class UpdateManager {
 	}
 	
 	/**
-	 * °²×°apk
+	 * å®‰è£…apk
 	 */
 	private void installApk(){
 		File apkfile = new File(apkFilePath);

@@ -28,13 +28,13 @@ import com.wy.common.client.AppClient;
 import com.wy.common.client.IXmlAppClient;
 
 /**
- * ÃèÊö£º¿Í»§¶ËÇëÇó·â×°
+ * æè¿°ï¼šå®¢æˆ·ç«¯è¯·æ±‚å°è£…
  * 
- * ×÷Õß: Liu wei
+ * ä½œè€…: Liu wei
  * 
- * ÓÊÏä£ºi@liuwei.co
+ * é‚®ç®±ï¼ši@liuwei.co
  * 
- * ´´½¨Ê±¼ä: 2013-1-30
+ * åˆ›å»ºæ—¶é—´: 2013-1-30
  */
 public abstract class XmlAppClient extends AppClient implements IXmlAppClient {
 
@@ -60,11 +60,11 @@ public abstract class XmlAppClient extends AppClient implements IXmlAppClient {
 	protected static String getUserAgent(AppContext appContext) {
 		if(appUserAgent == null || appUserAgent == "") {
 			StringBuilder ua = new StringBuilder("we-win.com.cn");
-			ua.append('/'+appContext.getPackageInfo().versionName+'_'+appContext.getPackageInfo().versionCode);//App°æ±¾
-			ua.append("/Android");//ÊÖ»úÏµÍ³Æ½Ì¨
-			ua.append("/"+android.os.Build.VERSION.RELEASE);//ÊÖ»úÏµÍ³°æ±¾
-			ua.append("/"+android.os.Build.MODEL); //ÊÖ»úĞÍºÅ
-			//ua.append("/"+appContext.getAppId());//¿Í»§¶ËÎ¨Ò»±êÊ¶
+			ua.append('/'+appContext.getPackageInfo().versionName+'_'+appContext.getPackageInfo().versionCode);//Appç‰ˆæœ¬
+			ua.append("/Android");//æ‰‹æœºç³»ç»Ÿå¹³å°
+			ua.append("/"+android.os.Build.VERSION.RELEASE);//æ‰‹æœºç³»ç»Ÿç‰ˆæœ¬
+			ua.append("/"+android.os.Build.MODEL); //æ‰‹æœºå‹å·
+			//ua.append("/"+appContext.getAppId());//å®¢æˆ·ç«¯å”¯ä¸€æ ‡è¯†
 			appUserAgent = ua.toString();
 		}
 		return appUserAgent;
@@ -72,22 +72,22 @@ public abstract class XmlAppClient extends AppClient implements IXmlAppClient {
 	
 	protected static HttpClient getHttpClient() {        
         HttpClient httpClient = new HttpClient();
-		// ÉèÖÃ HttpClient ½ÓÊÕ Cookie,ÓÃÓëä¯ÀÀÆ÷Ò»ÑùµÄ²ßÂÔ
+		// è®¾ç½® HttpClient æ¥æ”¶ Cookie,ç”¨ä¸æµè§ˆå™¨ä¸€æ ·çš„ç­–ç•¥
 		httpClient.getParams().setCookiePolicy(CookiePolicy.BROWSER_COMPATIBILITY);
-        // ÉèÖÃ Ä¬ÈÏµÄ³¬Ê±ÖØÊÔ´¦Àí²ßÂÔ
+        // è®¾ç½® é»˜è®¤çš„è¶…æ—¶é‡è¯•å¤„ç†ç­–ç•¥
 		httpClient.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, new DefaultHttpMethodRetryHandler());
-		// ÉèÖÃ Á¬½Ó³¬Ê±Ê±¼ä
+		// è®¾ç½® è¿æ¥è¶…æ—¶æ—¶é—´
 		httpClient.getHttpConnectionManager().getParams().setConnectionTimeout(TIMEOUT_CONNECTION);
-		// ÉèÖÃ ¶ÁÊı¾İ³¬Ê±Ê±¼ä 
+		// è®¾ç½® è¯»æ•°æ®è¶…æ—¶æ—¶é—´ 
 		httpClient.getHttpConnectionManager().getParams().setSoTimeout(TIMEOUT_SOCKET);
-		// ÉèÖÃ ×Ö·û¼¯
+		// è®¾ç½® å­—ç¬¦é›†
 		httpClient.getParams().setContentCharset(UTF_8);
 		return httpClient;
 	}	
 	
 	protected static GetMethod getHttpGet(String url, String cookie, String userAgent) {
 		GetMethod httpGet = new GetMethod(url);
-		// ÉèÖÃ ÇëÇó³¬Ê±Ê±¼ä
+		// è®¾ç½® è¯·æ±‚è¶…æ—¶æ—¶é—´
 		httpGet.getParams().setSoTimeout(TIMEOUT_SOCKET);
 		httpGet.setRequestHeader("Host", AppClient.appHost);
 		httpGet.setRequestHeader("Connection","Keep-Alive");
@@ -98,7 +98,7 @@ public abstract class XmlAppClient extends AppClient implements IXmlAppClient {
 	
 	protected static PostMethod getHttpPost(String url, String cookie, String userAgent) {
 		PostMethod httpPost = new PostMethod(url);
-		// ÉèÖÃ ÇëÇó³¬Ê±Ê±¼ä
+		// è®¾ç½® è¯·æ±‚è¶…æ—¶æ—¶é—´
 		httpPost.getParams().setSoTimeout(TIMEOUT_SOCKET);
 		httpPost.setRequestHeader("Host", AppClient.appHost);
 		httpPost.setRequestHeader("Connection","Keep-Alive");
@@ -118,7 +118,7 @@ public abstract class XmlAppClient extends AppClient implements IXmlAppClient {
 				url.append(name);
 				url.append('=');
 				url.append(String.valueOf(params.get(name)));
-				// ²»×öURLEncoder´¦Àí
+				// ä¸åšURLEncoderå¤„ç†
 				// url.append(URLEncoder.encode(String.valueOf(params.get(name)),
 				// UTF_8));
 			}
@@ -127,7 +127,7 @@ public abstract class XmlAppClient extends AppClient implements IXmlAppClient {
 	}
 
 	/**
-	 * getÇëÇóURL
+	 * getè¯·æ±‚URL
 	 * 
 	 * @param url
 	 * @throws Exception
@@ -148,8 +148,8 @@ public abstract class XmlAppClient extends AppClient implements IXmlAppClient {
 				httpGet = getHttpGet(url, cookie, userAgent);
 				int statusCode = httpClient.executeMethod(httpGet);
 				if (statusCode != HttpStatus.SC_OK) {
-					throw new HttpException("ÇëÇó[" + url
-							+ "]Ê§°Ü,ÍøÂç´íÎó£¬ÏìÓ¦Âë statusCode = " + statusCode);
+					throw new HttpException("è¯·æ±‚[" + url
+							+ "]å¤±è´¥,ç½‘ç»œé”™è¯¯ï¼Œå“åº”ç  statusCode = " + statusCode);
 				}
 				responseBody = httpGet.getResponseBodyAsString();
 				System.out.println("XMLDATA=====>" + responseBody);
@@ -163,8 +163,8 @@ public abstract class XmlAppClient extends AppClient implements IXmlAppClient {
 					}
 					continue;
 				}
-				// ·¢ÉúÖÂÃüµÄÒì³££¬¿ÉÄÜÊÇĞ­Òé²»¶Ô»òÕß·µ»ØµÄÄÚÈİÓĞÎÊÌâ
-				throw new HttpException("ÇëÇó[" + url + "]Ê§°Ü,´íÎóĞÅÏ¢£º"
+				// å‘ç”Ÿè‡´å‘½çš„å¼‚å¸¸ï¼Œå¯èƒ½æ˜¯åè®®ä¸å¯¹æˆ–è€…è¿”å›çš„å†…å®¹æœ‰é—®é¢˜
+				throw new HttpException("è¯·æ±‚[" + url + "]å¤±è´¥,é”™è¯¯ä¿¡æ¯ï¼š"
 						+ e.getMessage());
 			} catch (IOException e) {
 				time++;
@@ -175,11 +175,11 @@ public abstract class XmlAppClient extends AppClient implements IXmlAppClient {
 					}
 					continue;
 				}
-				// ·¢ÉúÍøÂçÒì³£
-				throw new IOException("ÇëÇó[" + url + "]Ê§°Ü,´íÎóĞÅÏ¢£º"
+				// å‘ç”Ÿç½‘ç»œå¼‚å¸¸
+				throw new IOException("è¯·æ±‚[" + url + "]å¤±è´¥,é”™è¯¯ä¿¡æ¯ï¼š"
 						+ e.getMessage());
 			} finally {
-				// ÊÍ·ÅÁ¬½Ó
+				// é‡Šæ”¾è¿æ¥
 				if (httpGet != null) {
 					httpGet.releaseConnection();
 					httpClient = null;
@@ -191,7 +191,7 @@ public abstract class XmlAppClient extends AppClient implements IXmlAppClient {
 	}
 
 	/**
-	 * ¹«ÓÃpost·½·¨
+	 * å…¬ç”¨postæ–¹æ³•
 	 * 
 	 * @param url
 	 * @param params
@@ -202,11 +202,11 @@ public abstract class XmlAppClient extends AppClient implements IXmlAppClient {
 	 */
 	protected InputStream _POST(AppContext appContext,String url, Map<String, Object> params,
 			Map<String, File> files) throws HttpException, IOException {
-		System.out.println("_POST ÇëÇó²ÎÊıĞÅÏ¢¿ªÊ¼");
+		System.out.println("_POST è¯·æ±‚å‚æ•°ä¿¡æ¯å¼€å§‹");
 		System.out.println(url);
 		System.out.println(params);
 		System.out.println(files);
-		System.out.println("_POST ÇëÇó²ÎÊıĞÅÏ¢½áÊø");
+		System.out.println("_POST è¯·æ±‚å‚æ•°ä¿¡æ¯ç»“æŸ");
 		
 		String cookie = getCookie(appContext);
 		String userAgent = getUserAgent(appContext);
@@ -214,7 +214,7 @@ public abstract class XmlAppClient extends AppClient implements IXmlAppClient {
 		HttpClient httpClient = null;
 		PostMethod httpPost = null;
 
-		// post±íµ¥²ÎÊı´¦Àí
+		// postè¡¨å•å‚æ•°å¤„ç†
 		int length = (params == null ? 0 : params.size())
 				+ (files == null ? 0 : files.size());
 		Part[] parts = new Part[length];
@@ -246,8 +246,8 @@ public abstract class XmlAppClient extends AppClient implements IXmlAppClient {
 						httpPost.getParams()));
 				int statusCode = httpClient.executeMethod(httpPost);
 				if (statusCode != HttpStatus.SC_OK) {
-					throw new HttpException("ÇëÇóURL:" + url + " ²ÎÊı£º" + params
-							+ "Ê§°Ü,ÍøÂç´íÎó£¬ÏìÓ¦Âë statusCode = " + statusCode);
+					throw new HttpException("è¯·æ±‚URL:" + url + " å‚æ•°ï¼š" + params
+							+ "å¤±è´¥,ç½‘ç»œé”™è¯¯ï¼Œå“åº”ç  statusCode = " + statusCode);
 				}
 				responseBody = httpPost.getResponseBodyAsString();
 				System.out.println("XMLDATA=====>" + responseBody);
@@ -261,9 +261,9 @@ public abstract class XmlAppClient extends AppClient implements IXmlAppClient {
 					}
 					continue;
 				}
-				// ·¢ÉúÖÂÃüµÄÒì³££¬¿ÉÄÜÊÇĞ­Òé²»¶Ô»òÕß·µ»ØµÄÄÚÈİÓĞÎÊÌâ
-				throw new HttpException("ÇëÇóURL:" + url + " ²ÎÊı£º" + params
-						+ "Ê§°Ü,´íÎóĞÅÏ¢£º" + e.getMessage());
+				// å‘ç”Ÿè‡´å‘½çš„å¼‚å¸¸ï¼Œå¯èƒ½æ˜¯åè®®ä¸å¯¹æˆ–è€…è¿”å›çš„å†…å®¹æœ‰é—®é¢˜
+				throw new HttpException("è¯·æ±‚URL:" + url + " å‚æ•°ï¼š" + params
+						+ "å¤±è´¥,é”™è¯¯ä¿¡æ¯ï¼š" + e.getMessage());
 			} catch (IOException e) {
 				time++;
 				if (time < RETRY_TIME) {
@@ -273,11 +273,11 @@ public abstract class XmlAppClient extends AppClient implements IXmlAppClient {
 					}
 					continue;
 				}
-				// ·¢ÉúÍøÂçÒì³£
-				throw new IOException("ÇëÇóURL:" + url + " ²ÎÊı£º" + params
-						+ "Ê§°Ü,´íÎóĞÅÏ¢£º" + e.getMessage());
+				// å‘ç”Ÿç½‘ç»œå¼‚å¸¸
+				throw new IOException("è¯·æ±‚URL:" + url + " å‚æ•°ï¼š" + params
+						+ "å¤±è´¥,é”™è¯¯ä¿¡æ¯ï¼š" + e.getMessage());
 			} finally {
-				// ÊÍ·ÅÁ¬½Ó
+				// é‡Šæ”¾è¿æ¥
 				httpPost.releaseConnection();
 				httpClient = null;
 			}
@@ -287,7 +287,7 @@ public abstract class XmlAppClient extends AppClient implements IXmlAppClient {
 	}
 
 	/**
-	 * »ñÈ¡ÍøÂçÍ¼Æ¬
+	 * è·å–ç½‘ç»œå›¾ç‰‡
 	 * 
 	 * @param url
 	 * @return
@@ -306,8 +306,8 @@ public abstract class XmlAppClient extends AppClient implements IXmlAppClient {
 				httpGet = getHttpGet(url, null, null);
 				int statusCode = httpClient.executeMethod(httpGet);
 				if (statusCode != HttpStatus.SC_OK) {
-					throw new HttpException("»ñÈ¡Í¼Æ¬[" + url
-							+ "]Ê§°Ü,ÍøÂç´íÎó£¬ÏìÓ¦Âë statusCode = " + statusCode);
+					throw new HttpException("è·å–å›¾ç‰‡[" + url
+							+ "]å¤±è´¥,ç½‘ç»œé”™è¯¯ï¼Œå“åº”ç  statusCode = " + statusCode);
 				}
 				InputStream inStream = httpGet.getResponseBodyAsStream();
 				bitmap = BitmapFactory.decodeStream(inStream);
@@ -322,8 +322,8 @@ public abstract class XmlAppClient extends AppClient implements IXmlAppClient {
 					}
 					continue;
 				}
-				// ·¢ÉúÖÂÃüµÄÒì³££¬¿ÉÄÜÊÇĞ­Òé²»¶Ô»òÕß·µ»ØµÄÄÚÈİÓĞÎÊÌâ
-				throw new HttpException("»ñÈ¡Í¼Æ¬[" + url + "]Ê§°Ü,´íÎóĞÅÏ¢£º"
+				// å‘ç”Ÿè‡´å‘½çš„å¼‚å¸¸ï¼Œå¯èƒ½æ˜¯åè®®ä¸å¯¹æˆ–è€…è¿”å›çš„å†…å®¹æœ‰é—®é¢˜
+				throw new HttpException("è·å–å›¾ç‰‡[" + url + "]å¤±è´¥,é”™è¯¯ä¿¡æ¯ï¼š"
 						+ e.getMessage());
 			} catch (IOException e) {
 				time++;
@@ -334,11 +334,11 @@ public abstract class XmlAppClient extends AppClient implements IXmlAppClient {
 					}
 					continue;
 				}
-				// ·¢ÉúÍøÂçÒì³£
-				throw new IOException("»ñÈ¡Í¼Æ¬[" + url + "]Ê§°Ü,´íÎóĞÅÏ¢£º"
+				// å‘ç”Ÿç½‘ç»œå¼‚å¸¸
+				throw new IOException("è·å–å›¾ç‰‡[" + url + "]å¤±è´¥,é”™è¯¯ä¿¡æ¯ï¼š"
 						+ e.getMessage());
 			} finally {
-				// ÊÍ·ÅÁ¬½Ó
+				// é‡Šæ”¾è¿æ¥
 				httpGet.releaseConnection();
 				httpClient = null;
 			}

@@ -9,13 +9,13 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 /** 
- * ÃèÊö£ºÍ¨¹ıArrayList°ü×°µÄÊÊÅäÆ÷
+ * æè¿°ï¼šé€šè¿‡ArrayListåŒ…è£…çš„é€‚é…å™¨
  *
- * ×÷Õß: Liu wei
+ * ä½œè€…: Liu wei
  * 
- * ÓÊÏä£ºi@liuwei.co
+ * é‚®ç®±ï¼ši@liuwei.co
  * 
- * ´´½¨Ê±¼ä: 2013-5-29
+ * åˆ›å»ºæ—¶é—´: 2013-5-29
  */
 public abstract class ArrayListAdapter<T> extends BaseAdapter {
 	

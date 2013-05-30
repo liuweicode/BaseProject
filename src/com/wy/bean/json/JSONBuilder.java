@@ -4,18 +4,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /** 
- * ÃèÊö£ºÍ¨¹ıJSONObject¹¹½¨ÊµÌå¶ÔÏó
+ * æè¿°ï¼šé€šè¿‡JSONObjectæ„å»ºå®ä½“å¯¹è±¡
  *
- * ×÷Õß: Liu wei
+ * ä½œè€…: Liu wei
  * 
- * ÓÊÏä£ºi@liuwei.co
+ * é‚®ç®±ï¼ši@liuwei.co
  * 
- * ´´½¨Ê±¼ä: 2013-5-30
+ * åˆ›å»ºæ—¶é—´: 2013-5-30
  */
 public abstract class JSONBuilder<T> {
 	
 	/**
-	 * ×ÓÀàÊµÏÖbuild·½·¨´´½¨ÊµÌå
+	 * å­ç±»å®ç°buildæ–¹æ³•åˆ›å»ºå®ä½“
 	 * 
 	 * @param jsonObject
 	 * @return

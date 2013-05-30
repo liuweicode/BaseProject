@@ -12,23 +12,23 @@ import android.widget.Toast;
 import com.wy.R;
 
 /** 
- * ÃèÊö£º×Ô¶¨ÒåToast ¿ÉÒÔ²¥·ÅÉùÒô ¿ÉÒÔ×Ô¶¨ÒåÏÔÊ¾Î»ÖÃ
+ * æè¿°ï¼šè‡ªå®šä¹‰Toast å¯ä»¥æ’­æ”¾å£°éŸ³ å¯ä»¥è‡ªå®šä¹‰æ˜¾ç¤ºä½ç½®
  *
- * ×÷Õß: Liu wei
+ * ä½œè€…: Liu wei
  * 
- * ÓÊÏä£ºi@liuwei.co
+ * é‚®ç®±ï¼ši@liuwei.co
  * 
- * ´´½¨Ê±¼ä: 2013-1-21
+ * åˆ›å»ºæ—¶é—´: 2013-1-21
  */
 public class AppToast extends Toast{
 	
-	/*ÏÔÊ¾ÉùÒô*/
+	/*æ˜¾ç¤ºå£°éŸ³*/
 	public static final int SOUND_NO = -1;
 	public static final int SOUND_1 = R.raw.sound1;
 	public static final int SOUND_2 = R.raw.sound2;
 	public static final int SOUND_ERROR = R.raw.error;
 	
-	/*ÏÔÊ¾Î»ÖÃ*/
+	/*æ˜¾ç¤ºä½ç½®*/
 	public static final int POSITION_TOP = Gravity.TOP;
 	public static final int POSITION_CENTER = Gravity.CENTER;
 	public static final int POSITION_BOTTOM = Gravity.BOTTOM;
@@ -37,12 +37,12 @@ public class AppToast extends Toast{
 
 	protected boolean isSound;
 	
-	/*Ä¬ÈÏ²»ÏÔÊ¾ÉùÒô*/
+	/*é»˜è®¤ä¸æ˜¾ç¤ºå£°éŸ³*/
 	public AppToast(Context context) {
 		this(context,SOUND_NO);
 	}
 	
-	/*Èç¹ûsoundSourceµÈÓÚSOUND_NO Ôò²»²¥·ÅÉùÒô*/
+	/*å¦‚æœsoundSourceç­‰äºSOUND_NO åˆ™ä¸æ’­æ”¾å£°éŸ³*/
 	public AppToast(Context context,int soundSource) {
 		super(context);
 		if(soundSource == SOUND_NO){
@@ -69,28 +69,28 @@ public class AppToast extends Toast{
 	}
 	
 	/**
-	 * »ñÈ¡×Ô¶¨ÒåToastÊµÀı Ä¬ÈÏÏÔÊ¾ÔÚÉÏ·½ Æ«ÒÆÁ¿Îª0
+	 * è·å–è‡ªå®šä¹‰Toastå®ä¾‹ é»˜è®¤æ˜¾ç¤ºåœ¨ä¸Šæ–¹ åç§»é‡ä¸º0
 	 * 
 	 * @param context 
-	 * @param text ÌáÊ¾ÏûÏ¢
-	 * @param soundSource ²¥·ÅÉùÒôµÄ×ÊÔ´ Ä¿Ç°Ö§³Ö SOUND_1  SOUND_2  Èç¹û²»ĞèÒª²¥·ÅÉùÒôÔòÎªSOUND_NO
-	 * @param time ÌáÊ¾ÏûÏ¢ÏÔÊ¾µÄÊ±¼ä
-	 * @param position ÌáÊ¾ÏûÏ¢ÏÔÊ¾µÄÎ»ÖÃ
-	 * @param xOffset ÌáÊ¾ÏûÏ¢ÏÔÊ¾µÄÎ»ÖÃXÖáÆ«ÒÆÁ¿
-	 * @param yOffset ÌáÊ¾ÏûÏ¢ÏÔÊ¾µÄÎ»ÖÃYÖáÆ«ÒÆÁ¿
+	 * @param text æç¤ºæ¶ˆæ¯
+	 * @param soundSource æ’­æ”¾å£°éŸ³çš„èµ„æº ç›®å‰æ”¯æŒ SOUND_1  SOUND_2  å¦‚æœä¸éœ€è¦æ’­æ”¾å£°éŸ³åˆ™ä¸ºSOUND_NO
+	 * @param time æç¤ºæ¶ˆæ¯æ˜¾ç¤ºçš„æ—¶é—´
+	 * @param position æç¤ºæ¶ˆæ¯æ˜¾ç¤ºçš„ä½ç½®
+	 * @param xOffset æç¤ºæ¶ˆæ¯æ˜¾ç¤ºçš„ä½ç½®Xè½´åç§»é‡
+	 * @param yOffset æç¤ºæ¶ˆæ¯æ˜¾ç¤ºçš„ä½ç½®Yè½´åç§»é‡
 	 * @return
 	 */
 	public static AppToast makeText(Context context, CharSequence text, int soundSource) {
         return makeText(context, text, soundSource, 600, POSITION_TOP,0,0);
     }
 	/**
-	 * »ñÈ¡×Ô¶¨ÒåToastÊµÀı Ä¬ÈÏÆ«ÒÆÁ¿Îª0
+	 * è·å–è‡ªå®šä¹‰Toastå®ä¾‹ é»˜è®¤åç§»é‡ä¸º0
 	 * 
 	 * @param context 
-	 * @param text ÌáÊ¾ÏûÏ¢
-	 * @param soundSource ²¥·ÅÉùÒôµÄ×ÊÔ´ Ä¿Ç°Ö§³Ö SOUND_1  SOUND_2  Èç¹û²»ĞèÒª²¥·ÅÉùÒôÔòÎªSOUND_NO
-	 * @param time ÌáÊ¾ÏûÏ¢ÏÔÊ¾µÄÊ±¼ä
-	 * @param position ÌáÊ¾ÏûÏ¢ÏÔÊ¾µÄÎ»ÖÃ
+	 * @param text æç¤ºæ¶ˆæ¯
+	 * @param soundSource æ’­æ”¾å£°éŸ³çš„èµ„æº ç›®å‰æ”¯æŒ SOUND_1  SOUND_2  å¦‚æœä¸éœ€è¦æ’­æ”¾å£°éŸ³åˆ™ä¸ºSOUND_NO
+	 * @param time æç¤ºæ¶ˆæ¯æ˜¾ç¤ºçš„æ—¶é—´
+	 * @param position æç¤ºæ¶ˆæ¯æ˜¾ç¤ºçš„ä½ç½®
 	 * @return
 	 */
 	public static AppToast makeText(Context context, CharSequence text, int soundSource,int time) {
@@ -98,15 +98,15 @@ public class AppToast extends Toast{
 	}
 	
 	/**
-	 * »ñÈ¡×Ô¶¨ÒåToastÊµÀı
+	 * è·å–è‡ªå®šä¹‰Toastå®ä¾‹
 	 * 
 	 * @param context 
-	 * @param text ÌáÊ¾ÏûÏ¢
-	 * @param soundSource ²¥·ÅÉùÒôµÄ×ÊÔ´ Ä¿Ç°Ö§³Ö SOUND_1  SOUND_2  Èç¹û²»ĞèÒª²¥·ÅÉùÒôÔòÎªSOUND_NO
-	 * @param time ÌáÊ¾ÏûÏ¢ÏÔÊ¾µÄÊ±¼ä
-	 * @param position ÌáÊ¾ÏûÏ¢ÏÔÊ¾µÄÎ»ÖÃ
-	 * @param xOffset ÌáÊ¾ÏûÏ¢ÏÔÊ¾µÄÎ»ÖÃXÖáÆ«ÒÆÁ¿
-	 * @param yOffset ÌáÊ¾ÏûÏ¢ÏÔÊ¾µÄÎ»ÖÃYÖáÆ«ÒÆÁ¿
+	 * @param text æç¤ºæ¶ˆæ¯
+	 * @param soundSource æ’­æ”¾å£°éŸ³çš„èµ„æº ç›®å‰æ”¯æŒ SOUND_1  SOUND_2  å¦‚æœä¸éœ€è¦æ’­æ”¾å£°éŸ³åˆ™ä¸ºSOUND_NO
+	 * @param time æç¤ºæ¶ˆæ¯æ˜¾ç¤ºçš„æ—¶é—´
+	 * @param position æç¤ºæ¶ˆæ¯æ˜¾ç¤ºçš„ä½ç½®
+	 * @param xOffset æç¤ºæ¶ˆæ¯æ˜¾ç¤ºçš„ä½ç½®Xè½´åç§»é‡
+	 * @param yOffset æç¤ºæ¶ˆæ¯æ˜¾ç¤ºçš„ä½ç½®Yè½´åç§»é‡
 	 * @return
 	 */
 	public static AppToast makeText(Context context, CharSequence text, int soundSource,int time,int position,int xOffset, int yOffset) {
@@ -115,7 +115,7 @@ public class AppToast extends Toast{
 		DisplayMetrics dm = context.getResources().getDisplayMetrics();
 		
 		View v = inflate.inflate(R.layout.app_toast, null);
-		v.setMinimumWidth(dm.widthPixels);//ÉèÖÃ¿Ø¼ş×îĞ¡¿í¶ÈÎªÊÖ»úÆÁÄ»¿í¶È
+		v.setMinimumWidth(dm.widthPixels);//è®¾ç½®æ§ä»¶æœ€å°å®½åº¦ä¸ºæ‰‹æœºå±å¹•å®½åº¦
 		TextView tv = (TextView)v.findViewById(R.id.app_toast_message);
 		tv.setText(text);
 		

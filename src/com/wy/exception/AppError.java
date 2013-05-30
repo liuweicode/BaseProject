@@ -20,34 +20,34 @@ import com.wy.AppManager;
 import com.wy.mail.Mail;
 
 /** 
- * ÃèÊö£ºÏµÍ³ÑÏÖØÒì³££¨Èç³ÌĞòÒì³£ÍË³ö£©
+ * æè¿°ï¼šç³»ç»Ÿä¸¥é‡å¼‚å¸¸ï¼ˆå¦‚ç¨‹åºå¼‚å¸¸é€€å‡ºï¼‰
  *
- * ×÷Õß: Liu wei
+ * ä½œè€…: Liu wei
  * 
- * ÓÊÏä£ºi@liuwei.co
+ * é‚®ç®±ï¼ši@liuwei.co
  * 
- * ´´½¨Ê±¼ä: 2013-1-16
+ * åˆ›å»ºæ—¶é—´: 2013-1-16
  */
 public class AppError implements UncaughtExceptionHandler{
 
 	protected boolean isSendEmail = false;
 	
-	//ÏµÍ³Ä¬ÈÏµÄUncaughtException´¦ÀíÀà 
+	//ç³»ç»Ÿé»˜è®¤çš„UncaughtExceptionå¤„ç†ç±» 
 	protected Thread.UncaughtExceptionHandler mDefaultHandler;
 		
-	/*³õÊ¼»¯*/
+	/*åˆå§‹åŒ–*/
 	public void initUncaught() {
-		//»ñÈ¡ÏµÍ³Ä¬ÈÏµÄUncaughtException´¦ÀíÆ÷
+		//è·å–ç³»ç»Ÿé»˜è®¤çš„UncaughtExceptionå¤„ç†å™¨
 		mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
-		//ÉèÖÃ¸ÃCrashHandlerÎª³ÌĞòµÄÄ¬ÈÏ´¦ÀíÆ÷
+		//è®¾ç½®è¯¥CrashHandlerä¸ºç¨‹åºçš„é»˜è®¤å¤„ç†å™¨
 		Thread.setDefaultUncaughtExceptionHandler(this);
 	}
 	
-	/*µ±UncaughtException·¢ÉúÊ±»á×ªÈë¸Ãº¯ÊıÀ´´¦Àí*/
+	/*å½“UncaughtExceptionå‘ç”Ÿæ—¶ä¼šè½¬å…¥è¯¥å‡½æ•°æ¥å¤„ç†*/
 	@Override
 	public void uncaughtException(Thread thread, Throwable ex) {
 		if (!handleException(ex) && mDefaultHandler != null) {
-			//Èç¹ûÓÃ»§Ã»ÓĞ´¦ÀíÔòÈÃÏµÍ³Ä¬ÈÏµÄÒì³£´¦ÀíÆ÷À´´¦Àí
+			//å¦‚æœç”¨æˆ·æ²¡æœ‰å¤„ç†åˆ™è®©ç³»ç»Ÿé»˜è®¤çš„å¼‚å¸¸å¤„ç†å™¨æ¥å¤„ç†
 			mDefaultHandler.uncaughtException(thread, ex);
 		} else {
 			try {
@@ -56,34 +56,34 @@ public class AppError implements UncaughtExceptionHandler{
 				e.printStackTrace();
 				//AppException.exc(e).makeToast(AppContext.getContext());
 			}
-			//ÍË³ö³ÌĞò
+			//é€€å‡ºç¨‹åº
 			AppManager.getAppManager().AppExit(AppContext.getContext());
 		}
 	}
 	
 	/**
-	 * ×Ô¶¨Òå´íÎó´¦Àí,ÊÕ¼¯´íÎóĞÅÏ¢ ·¢ËÍ´íÎó±¨¸æµÈ²Ù×÷¾ùÔÚ´ËÍê³É.
+	 * è‡ªå®šä¹‰é”™è¯¯å¤„ç†,æ”¶é›†é”™è¯¯ä¿¡æ¯ å‘é€é”™è¯¯æŠ¥å‘Šç­‰æ“ä½œå‡åœ¨æ­¤å®Œæˆ.
 	 * 
 	 * @param ex
-	 * @return true:Èç¹û´¦ÀíÁË¸ÃÒì³£ĞÅÏ¢;·ñÔò·µ»Øfalse.
+	 * @return true:å¦‚æœå¤„ç†äº†è¯¥å¼‚å¸¸ä¿¡æ¯;å¦åˆ™è¿”å›false.
 	 */
 	private boolean handleException(Throwable ex) {
 		if (ex == null) {
 			return false;
 		}
-		//Ê¹ÓÃToastÀ´ÏÔÊ¾Òì³£ĞÅÏ¢
+		//ä½¿ç”¨Toastæ¥æ˜¾ç¤ºå¼‚å¸¸ä¿¡æ¯
 //		new Thread() {
 //			@Override
 //			public void run() {
 //				Looper.prepare();
-		Toast.makeText(AppContext.getContext(), "ºÜ±§Ç¸,³ÌĞò³öÏÖÒì³£,¼´½«ÍË³ö.", Toast.LENGTH_LONG).show();
+		Toast.makeText(AppContext.getContext(), "å¾ˆæŠ±æ­‰,ç¨‹åºå‡ºç°å¼‚å¸¸,å³å°†é€€å‡º.", Toast.LENGTH_LONG).show();
 //				Looper.loop();
 //			}
 //		}.start();
 		if(isSendEmail){
 			sendErrorInfoMail(ex);
 		}
-		//±£´æÈÕÖ¾ÎÄ¼ş 
+		//ä¿å­˜æ—¥å¿—æ–‡ä»¶ 
 		saveErrorLog(ex);
 		return true;
 	}
@@ -111,7 +111,7 @@ public class AppError implements UncaughtExceptionHandler{
 //	      String[] toArr = {"i@liuwei.co"};
 //	      m.setTo(toArr); 
 //	      m.setFrom("say.i.want.to.say@gmail.com"); 
-//	      m.setSubject("´íÎóĞÅÏ¢"); 
+//	      m.setSubject("é”™è¯¯ä¿¡æ¯"); 
 //	      m.setBody(sb.toString()); 
 //	      try { 
 //		        //m.addAttachment("/sdcard/EcookPad/Log/exception_log20130226.txt"); 
@@ -121,7 +121,7 @@ public class AppError implements UncaughtExceptionHandler{
 //	      } 
 	}
 	/**
-	 * ±£´æÒì³£ÈÕÖ¾
+	 * ä¿å­˜å¼‚å¸¸æ—¥å¿—
 	 * @param excp
 	 */
 	public void saveErrorLog(Throwable ex) {
@@ -137,7 +137,7 @@ public class AppError implements UncaughtExceptionHandler{
 		printWriter.close();
 		String result = writer.toString();
 		sb.append(result);
-		//ÔÚ¿ØÖÆÌ¨´òÓ¡
+		//åœ¨æ§åˆ¶å°æ‰“å°
 		System.err.println(sb.toString());
 		
 		String errorlog = "throwable_log"+new SimpleDateFormat("yyyyMMdd").format(new Date())+".txt";
@@ -146,7 +146,7 @@ public class AppError implements UncaughtExceptionHandler{
 		FileWriter fw = null;
 		PrintWriter pw = null;
 		try {
-			//ÅĞ¶ÏÊÇ·ñ¹ÒÔØÁËSD¿¨
+			//åˆ¤æ–­æ˜¯å¦æŒ‚è½½äº†SDå¡
 			String storageState = Environment.getExternalStorageState();		
 			if(storageState.equals(Environment.MEDIA_MOUNTED)){
 				savePath = Environment.getExternalStorageDirectory().getAbsolutePath() + AppConstants.WY_LOG_PATH;
@@ -156,7 +156,7 @@ public class AppError implements UncaughtExceptionHandler{
 				}
 				logFilePath = savePath + errorlog;
 			}
-			//Ã»ÓĞ¹ÒÔØSD¿¨£¬ÎŞ·¨Ğ´ÎÄ¼ş
+			//æ²¡æœ‰æŒ‚è½½SDå¡ï¼Œæ— æ³•å†™æ–‡ä»¶
 			if(logFilePath == ""){
 				return;
 			}

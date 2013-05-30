@@ -11,13 +11,13 @@ import android.media.MediaPlayer.OnErrorListener;
 import android.os.Bundle;  
 import android.os.Environment;   
 /** 
- * ÃèÊö£º
+ * æè¿°ï¼š
  *
- * ×÷Õß: Liu wei
+ * ä½œè€…: Liu wei
  * 
- * ÓÊÏä£ºi@liuwei.co
+ * é‚®ç®±ï¼ši@liuwei.co
  * 
- * ´´½¨Ê±¼ä: 2013-2-26
+ * åˆ›å»ºæ—¶é—´: 2013-2-26
  */
 public class MyAudioRecorder implements OnCompletionListener, OnErrorListener {
 	

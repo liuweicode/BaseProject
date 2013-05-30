@@ -1,21 +1,21 @@
 package com.wy.ui;
 /** 
- * ÃèÊö£º
+ * æè¿°ï¼š
  *
- * ×÷Õß: Liu wei
+ * ä½œè€…: Liu wei
  * 
- * ÓÊÏä£ºi@liuwei.co
+ * é‚®ç®±ï¼ši@liuwei.co
  * 
- * ´´½¨Ê±¼ä: 2013-1-28
+ * åˆ›å»ºæ—¶é—´: 2013-1-28
  */
 public interface IActivity {
 
 	/**
-	 * ³õÊ¼»¯½çÃæ¿Ø¼ş
+	 * åˆå§‹åŒ–ç•Œé¢æ§ä»¶
 	 */
 	abstract void initView();
 	/**
-	 * ³õÊ¼»¯½çÃæ¿Ø¼ş
+	 * åˆå§‹åŒ–ç•Œé¢æ§ä»¶
 	 */
 	abstract void setContentView();
 	

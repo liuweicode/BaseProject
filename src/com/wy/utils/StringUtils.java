@@ -3,14 +3,14 @@ package com.wy.utils;
 import java.util.Locale;
 
 /** 
- * ÃèÊö£º·Âapache commons°üĞ´µÄ×Ö·û´®²Ù×÷¹¤¾ßÀà
+ * æè¿°ï¼šä»¿apache commonsåŒ…å†™çš„å­—ç¬¦ä¸²æ“ä½œå·¥å…·ç±»
  * http://commons.apache.org/lang/api-2.5/org/apache/commons/lang/StringUtils.html
  *
- * ×÷Õß: Liu wei
+ * ä½œè€…: Liu wei
  * 
- * ÓÊÏä£ºi@liuwei.co
+ * é‚®ç®±ï¼ši@liuwei.co
  * 
- * ´´½¨Ê±¼ä: 2013-1-16
+ * åˆ›å»ºæ—¶é—´: 2013-1-16
  */
 public class StringUtils {
 

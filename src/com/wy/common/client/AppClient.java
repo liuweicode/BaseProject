@@ -1,13 +1,13 @@
 package com.wy.common.client;
 
 /** 
- * ÃèÊö£º
+ * æè¿°ï¼š
  *
- * ×÷Õß: Liu wei
+ * ä½œè€…: Liu wei
  * 
- * ÓÊÏä£ºi@liuwei.co
+ * é‚®ç®±ï¼ši@liuwei.co
  * 
- * ´´½¨Ê±¼ä: 2013-4-22
+ * åˆ›å»ºæ—¶é—´: 2013-4-22
  */
 public class AppClient {
 	
@@ -17,17 +17,17 @@ public class AppClient {
 	
 	public static String appHost; 
 	
-	/*»º´æÊ§Ğ§Ê±¼ä*/
+	/*ç¼“å­˜å¤±æ•ˆæ—¶é—´*/
 	public static final int CACHE_TIME = 60*60000;
-	/*´ÓÁ¬½Ó³ØÖĞÈ¡Á¬½ÓµÄ³¬Ê±Ê±¼ä*/
+	/*ä»è¿æ¥æ± ä¸­å–è¿æ¥çš„è¶…æ—¶æ—¶é—´*/
 	public final static int TIMEOUT = 1000;
-	/*Á¬½Ó³¬Ê±Ê±¼ä*/
+	/*è¿æ¥è¶…æ—¶æ—¶é—´*/
 	public final static int TIMEOUT_CONNECTION = 10*1000;//60*1000;
-	/*ÇëÇó³¬Ê±*/
+	/*è¯·æ±‚è¶…æ—¶*/
 	public final static int TIMEOUT_SOCKET = 10*1000;//60*1000;
-	/*ÖØÊÔ´ÎÊı*/
+	/*é‡è¯•æ¬¡æ•°*/
 	public final static int RETRY_TIME = 2;
-	/*×Ö·û±àÂë*/
+	/*å­—ç¬¦ç¼–ç */
 	protected final static String UTF_8 = "UTF-8";
 	
 }

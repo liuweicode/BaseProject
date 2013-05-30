@@ -8,13 +8,13 @@ import com.wy.AppManager;
 import com.wy.ui.IBaseActivity;
 
 /** 
- * ÃèÊö£ºActivity»ùÀà
+ * æè¿°ï¼šActivityåŸºç±»
  *
- * ×÷Õß: Liu wei
+ * ä½œè€…: Liu wei
  * 
- * ÓÊÏä£ºi@liuwei.co
+ * é‚®ç®±ï¼ši@liuwei.co
  * 
- * ´´½¨Ê±¼ä: 2013-1-16
+ * åˆ›å»ºæ—¶é—´: 2013-1-16
  */
 public abstract class BaseActivity extends Activity implements IBaseActivity{
 
@@ -23,26 +23,26 @@ public abstract class BaseActivity extends Activity implements IBaseActivity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//Ìí¼ÓActivityµ½¶ÑÕ»
+		//æ·»åŠ Activityåˆ°å †æ ˆ
 		AppManager.getAppManager().addActivity(this);
-		//¼ÓÔØ½çÃæÅäÖÃ
+		//åŠ è½½ç•Œé¢é…ç½®
 		setContentView();
-		//³õÊ¼»¯½çÃæ¿Ø¼ş
+		//åˆå§‹åŒ–ç•Œé¢æ§ä»¶
 		initView();
 	}
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		//½áÊøActivity&´Ó¶ÑÕ»ÖĞÒÆ³ı
+		//ç»“æŸActivity&ä»å †æ ˆä¸­ç§»é™¤
 		AppManager.getAppManager().finishActivity(this);
 	}
 	
-//	/**·µ»Ø¼üµã»÷´¥·¢£¬»Øµ½×ÀÃæ*/
+//	/**è¿”å›é”®ç‚¹å‡»è§¦å‘ï¼Œå›åˆ°æ¡Œé¢*/
 //	public void onBackPressed() {
 //		Intent intent = new Intent(Intent.ACTION_MAIN);
 //		intent.addCategory(Intent.CATEGORY_HOME);
-//		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // ×¢Òâ±¾ĞĞµÄFLAGÉèÖÃ
+//		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // æ³¨æ„æœ¬è¡Œçš„FLAGè®¾ç½®
 //		startActivity(intent);
 //	}
 }

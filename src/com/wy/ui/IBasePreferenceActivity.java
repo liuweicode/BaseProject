@@ -1,12 +1,12 @@
 package com.wy.ui;
 /** 
- * ÃèÊö£º
+ * æè¿°ï¼š
  *
- * ×÷Õß: Liu wei
+ * ä½œè€…: Liu wei
  * 
- * ÓÊÏä£ºi@liuwei.co
+ * é‚®ç®±ï¼ši@liuwei.co
  * 
- * ´´½¨Ê±¼ä: 2013-1-28
+ * åˆ›å»ºæ—¶é—´: 2013-1-28
  */
 public interface IBasePreferenceActivity extends IActivity {
 

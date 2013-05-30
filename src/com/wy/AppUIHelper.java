@@ -5,13 +5,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 
 /** 
- * ÃèÊö£º½çÃæUI¹¤¾ßÀà
+ * æè¿°ï¼šç•Œé¢UIå·¥å…·ç±»
  *
- * ×÷Õß: Liu wei
+ * ä½œè€…: Liu wei
  * 
- * ÓÊÏä£ºi@liuwei.co
+ * é‚®ç®±ï¼ši@liuwei.co
  * 
- * ´´½¨Ê±¼ä: 2013-1-16
+ * åˆ›å»ºæ—¶é—´: 2013-1-16
  */
 public class AppUIHelper {
 
@@ -26,7 +26,7 @@ public class AppUIHelper {
 	public final static int LISTVIEW_DATA_EMPTY = 0x04;
 	
 	/**
-	 * µ¯³öÍË³ö³ÌĞò¶Ô»°¿ò
+	 * å¼¹å‡ºé€€å‡ºç¨‹åºå¯¹è¯æ¡†
 	 * 
 	 * @param cont
 	 */
@@ -38,7 +38,7 @@ public class AppUIHelper {
 		builder.setPositiveButton(R.string.sure, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
-				//ÍË³ö
+				//é€€å‡º
 				AppManager.getAppManager().AppExit(cont);
 			}
 		});

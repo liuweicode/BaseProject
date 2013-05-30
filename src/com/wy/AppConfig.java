@@ -8,21 +8,21 @@ import java.util.Properties;
 import android.content.Context;
 
 /** 
- * ÃèÊö£ºÓ¦ÓÃ³ÌĞòÅäÖÃĞÅÏ¢
+ * æè¿°ï¼šåº”ç”¨ç¨‹åºé…ç½®ä¿¡æ¯
  *
- * ×÷Õß: Liu wei
+ * ä½œè€…: Liu wei
  * 
- * ÓÊÏä£ºi@liuwei.co
+ * é‚®ç®±ï¼ši@liuwei.co
  * 
- * ´´½¨Ê±¼ä: 2013-1-16
+ * åˆ›å»ºæ—¶é—´: 2013-1-16
  */
 public class AppConfig {
 	
 	private final static String APP_CONFIG = "config";
 	
-	private Context mContext;//ÉÏÏÂÎÄ
+	private Context mContext;//ä¸Šä¸‹æ–‡
 	
-	private static AppConfig appConfig;//Ó¦ÓÃ³ÌĞòÅäÖÃ
+	private static AppConfig appConfig;//åº”ç”¨ç¨‹åºé…ç½®
 	
 	public static AppConfig getAppConfig(Context context)
 	{
@@ -43,7 +43,7 @@ public class AppConfig {
 		FileInputStream fis = null;
 		Properties props = new Properties();
 		try{
-			//¶ÁÈ¡app_configÄ¿Â¼ÏÂµÄconfig
+			//è¯»å–app_configç›®å½•ä¸‹çš„config
 			File dirConf = mContext.getDir(APP_CONFIG, Context.MODE_PRIVATE);
 			fis = new FileInputStream(dirConf.getPath() + File.separator + APP_CONFIG);
 			props.load(fis);
@@ -59,7 +59,7 @@ public class AppConfig {
 	private void setProps(Properties p) {
 		FileOutputStream fos = null;
 		try{
-			//°Ñconfig½¨ÔÚ(×Ô¶¨Òå)app_configµÄÄ¿Â¼ÏÂ
+			//æŠŠconfigå»ºåœ¨(è‡ªå®šä¹‰)app_configçš„ç›®å½•ä¸‹
 			File dirConf = mContext.getDir(APP_CONFIG, Context.MODE_PRIVATE);
 			File conf = new File(dirConf, APP_CONFIG);
 			fos = new FileOutputStream(conf);
