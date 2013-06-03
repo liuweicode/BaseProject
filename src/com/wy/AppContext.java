@@ -14,8 +14,6 @@ import java.util.UUID;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
 
 import com.wy.exception.AppError;
 import com.wy.utils.lang.StringUtils;
@@ -35,7 +33,9 @@ public class AppContext extends Application{
 	protected final String LOG_TAG = this.getClass().getSimpleName();
 	
 	private static AppContext instance;
+	
 	protected static Context appContext;
+	
 	
 	@Override
 	public void onCreate(){
@@ -46,8 +46,7 @@ public class AppContext extends Application{
 		mImageCache = new ImageCache();
 		
 		//当程序发生Uncaught异常时捕获
-		AppError appCrashHandler = new AppError();
-		appCrashHandler.initUncaught();
+		AppError.getAppError().initUncaught();
 	}
 	
 	private ImageCache mImageCache;
@@ -198,19 +197,19 @@ public class AppContext extends Application{
 		AppConfig.getAppConfig(this).remove(key);
 	}
 	
-	/**
-	 * 获取App安装包信息
-	 * @return
-	 */
-	public PackageInfo getPackageInfo() {
-		PackageInfo info = null;
-		try { 
-			info = getPackageManager().getPackageInfo(getPackageName(), 0);
-		} catch (NameNotFoundException e) {    
-			e.printStackTrace(System.err);
-		} 
-		if(info == null) info = new PackageInfo();
-		return info;
-	}
+//	/**
+//	 * 获取App安装包信息
+//	 * @return
+//	 */
+//	public PackageInfo getPackageInfo() {
+//		PackageInfo info = null;
+//		try { 
+//			info = getPackageManager().getPackageInfo(getPackageName(), 0);
+//		} catch (NameNotFoundException e) {    
+//			e.printStackTrace(System.err);
+//		} 
+//		if(info == null) info = new PackageInfo();
+//		return info;
+//	}
 	
 }

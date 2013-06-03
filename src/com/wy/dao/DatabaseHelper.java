@@ -29,13 +29,13 @@ public abstract class DatabaseHelper extends OrmLiteSqliteOpenHelper{
 	/**
 	 * 初始化需要创建的表
 	 * 例如在子类中重载代码如下：
-	 * super.dataClass = new Class<?>[]{ TABLE1.class, TABLE2.class };
+	 * return new Class<?>[]{ TABLE1.class, TABLE2.class };
 	 */
-	public abstract void initDataClass();
+	public abstract Class<?>[] getDataTableClass();
 			
 	public DatabaseHelper(Context context, String databaseName,CursorFactory factory, int databaseVersion) {
 		super(context, databaseName, factory, databaseVersion);
-		initDataClass();
+		dataClass = getDataTableClass();
 	}
 
 	/**

@@ -9,12 +9,18 @@ import java.io.Writer;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.Date;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Environment;
+import android.os.Looper;
 import android.widget.Toast;
 
 import com.wy.AppConstants;
 import com.wy.AppContext;
-import com.wy.utils.lang.DateUtil;
+import com.wy.R;
+import com.wy.mail.MailUtil;
+import com.wy.utils.FileUtils;
 import com.wy.utils.ui.ActivityTaskManager;
 
 /** 
@@ -28,11 +34,25 @@ import com.wy.utils.ui.ActivityTaskManager;
  */
 public class AppError implements UncaughtExceptionHandler{
 
-	protected boolean isSendEmail = false;
+	private static final long ERROR_LOG_FILE_MAX_SIZE = 1*1024*1024;//日志文件最大1M
+	
+	private static final String ERROR_LOG_FILE_NAME = "ThrowableLog.txt";
 	
 	//系统默认的UncaughtException处理类 
 	protected Thread.UncaughtExceptionHandler mDefaultHandler;
-		
+	
+	private AppError(){}
+	
+	private static AppError appError;
+	
+	public static AppError getAppError(){
+		if(appError == null)
+		{
+			appError = new AppError();
+		}
+		return appError;
+	}
+	
 	/*初始化*/
 	public void initUncaught() {
 		//获取系统默认的UncaughtException处理器
@@ -54,9 +74,9 @@ public class AppError implements UncaughtExceptionHandler{
 				e.printStackTrace();
 				//AppException.exc(e).makeToast(AppContext.getContext());
 			}
-			//退出程序
-			ActivityTaskManager.getInstance().AppExit(AppContext.getContext());
 		}
+		//退出程序
+		ActivityTaskManager.getInstance().AppExit(AppContext.getContext());
 	}
 	
 	/**
@@ -70,54 +90,21 @@ public class AppError implements UncaughtExceptionHandler{
 			return false;
 		}
 		//使用Toast来显示异常信息
-//		new Thread() {
-//			@Override
-//			public void run() {
-//				Looper.prepare();
-		Toast.makeText(AppContext.getContext(), "很抱歉,程序出现异常,即将退出.", Toast.LENGTH_LONG).show();
-//				Looper.loop();
-//			}
-//		}.start();
-		if(isSendEmail){
-			sendErrorInfoMail(ex);
-		}
+		new Thread() {
+			@Override
+			public void run() {
+				Looper.prepare();
+				Toast.makeText(AppContext.getContext(), "很抱歉,程序出现异常,即将退出!", Toast.LENGTH_LONG).show();
+				Looper.loop();
+			}
+		}.start();
+		AppContext.getInstance().setProperty(AppConstants.ISABNORMALEXIT,"true");
 		//保存日志文件 
 		saveErrorLog(ex);
+		ActivityTaskManager.getInstance().AppExit(AppContext.getContext());
 		return true;
 	}
 	
-	public void sendErrorInfoMail(Throwable ex){
-		StringBuffer sb = new StringBuffer();
-		sb.append("--------------------"+(new Date().toLocaleString())+"---------------------\n");
-		Writer writer = new StringWriter();
-		PrintWriter printWriter = new PrintWriter(writer);
-		ex.printStackTrace(printWriter);
-		Throwable cause = ex.getCause();
-		while (cause != null) {
-			cause.printStackTrace(printWriter);
-			cause = cause.getCause();
-		}
-		printWriter.close();
-		String result = writer.toString();
-		sb.append(result);
-		
-//		  Mail m = new Mail("say.i.want.to.say@gmail.com", ""); 
-//	      m.setHost("smtp.gmail.com");
-//	      m.setPort("465");
-//	      m.setSport("465");
-//	      
-//	      String[] toArr = {"i@liuwei.co"};
-//	      m.setTo(toArr); 
-//	      m.setFrom("say.i.want.to.say@gmail.com"); 
-//	      m.setSubject("错误信息"); 
-//	      m.setBody(sb.toString()); 
-//	      try { 
-//		        //m.addAttachment("/sdcard/EcookPad/Log/exception_log20130226.txt"); 
-//		        m.send();
-//	      } catch(Exception e) {
-//		        Log.e("AppError", "Could not send email", e); 
-//	      } 
-	}
 	/**
 	 * 保存异常日志
 	 * @param excp
@@ -138,37 +125,38 @@ public class AppError implements UncaughtExceptionHandler{
 		//在控制台打印
 		System.err.println(sb.toString());
 		
-		String errorlog = "throwable_log"+DateUtil.date2TimeStr(new Date(),"yyyyMMdd")+".txt";
-		String savePath = "";
-		String logFilePath = "";
 		FileWriter fw = null;
 		PrintWriter pw = null;
 		try {
 			//判断是否挂载了SD卡
-			String storageState = Environment.getExternalStorageState();		
-			if(storageState.equals(Environment.MEDIA_MOUNTED)){
-				savePath = Environment.getExternalStorageDirectory().getAbsolutePath() + AppConstants.WY_LOG_PATH;
-				File file = new File(savePath);
-				if(!file.exists()){
-					file.mkdirs();
+			if(FileUtils.checkSDCardExists()){
+				String savePath = Environment.getExternalStorageDirectory().getAbsolutePath() + AppConstants.WY_LOG_PATH;
+				if(!FileUtils.checkFileExists(savePath)){
+					FileUtils.createDirectorys(savePath);
 				}
-				logFilePath = savePath + errorlog;
+				String logFilePath = savePath + ERROR_LOG_FILE_NAME;
+				File logFile = new File(logFilePath);
+				if (logFile.exists()) {
+					//日志文件存在 则检测其大小
+					long fileSize = FileUtils.getFileSize(logFilePath);
+					//如果日志文件超过1M 则删除再创建
+					if(fileSize >= ERROR_LOG_FILE_MAX_SIZE){
+						if(logFile.delete()){
+							logFile.createNewFile();
+						}
+					}
+				}else{
+					//日志文件不存在 则创建新文件
+					logFile.createNewFile();
+				}
+				
+				fw = new FileWriter(logFile,true);
+				pw = new PrintWriter(fw);
+				pw.println("--------------------"+(new Date().toLocaleString())+"---------------------");	
+				pw.write(sb.toString());
+				pw.close();
+				fw.close();
 			}
-			//没有挂载SD卡，无法写文件
-			if(logFilePath == ""){
-				return;
-			}
-			File logFile = new File(logFilePath);
-			if (!logFile.exists()) {
-				logFile.createNewFile();
-			}
-			
-			fw = new FileWriter(logFile,true);
-			pw = new PrintWriter(fw);
-			pw.println("--------------------"+(new Date().toLocaleString())+"---------------------");	
-			pw.write(sb.toString());
-			pw.close();
-			fw.close();
 		} catch (Exception e) {
 			e.printStackTrace();		
 		}finally{ 
@@ -176,5 +164,40 @@ public class AppError implements UncaughtExceptionHandler{
 			if(fw != null){ try { fw.close(); } catch (IOException e) { }}
 		}
 	}
-
+	
+	/**
+	 * 检查是否异常退出 如果异常退出 则提示用户是否需要发送错误报告
+	 * 
+	 * @param isConfirm 是否弹出确认对话框
+	 */
+	public void checkError(boolean isConfirm,final Context context){
+		if(isConfirm){
+			if("true".equals(AppContext.getInstance().getProperty(AppConstants.ISABNORMALEXIT))){
+				new AlertDialog.Builder(context)
+				.setTitle("发送错误日志")
+				.setIcon(R.drawable.notification_error)
+				.setMessage("系统检测到程序异常退出,是否发送错误日志？")
+				.setPositiveButton("发送", new DialogInterface.OnClickListener() {
+					
+					public void onClick(DialogInterface dialog, int which) {
+						MailUtil.sendErrorInfoMail(context);
+					}
+				})
+				.setNegativeButton("不发送", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						AppContext.getInstance().removeProperty(AppConstants.ISABNORMALEXIT);
+					}
+				})
+				.show();
+			}
+		}else{
+			if("true".equals(AppContext.getInstance().getProperty(AppConstants.ISABNORMALEXIT))){
+				MailUtil.sendErrorInfoMail(context);
+			}
+		}
+		
+	}
+	
+	
+	
 }

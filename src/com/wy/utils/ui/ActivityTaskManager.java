@@ -162,11 +162,14 @@ public class ActivityTaskManager {
 	 * 退出应用程序
 	 */
 	public void AppExit(Context context) {
+		System.out.println("AppExit 退出应用程序");
 		try {
 			//关闭所有Activity
 			closeAllActivity();
 			ActivityManager activityMgr= (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
 			activityMgr.restartPackage(context.getPackageName());
+			// kill App Progress  
+            //android.os.Process.killProcess(android.os.Process.myPid());
 			System.exit(0);
 		} catch (Exception e) {	}
 	}

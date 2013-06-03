@@ -90,15 +90,6 @@ public class FileUtils {
 		return null;
 	}
 	
-	public static File createFile( String folderPath, String fileName )
-	{
-		File destDir = new File(folderPath);
-		if (!destDir.exists()) 
-		{
-			destDir.mkdirs();
-		}
-		return new File(folderPath,  fileName + fileName );
-	}
 	
 	/**
 	 * 向手机写图片
@@ -303,11 +294,10 @@ public class FileUtils {
 	 * @param name
 	 * @return
 	 */
-	public static boolean checkFileExists(String name) {
+	public static boolean checkFileExists(String filePath) {
 		boolean status;
-		if (!name.equals("")) {
-			File path = Environment.getExternalStorageDirectory();
-			File newPath = new File(path.toString() + name);
+		if (!"".equals(filePath)) {
+			File newPath = new File(filePath);
 			status = newPath.exists();
 		} else {
 			status = false;
@@ -344,12 +334,28 @@ public class FileUtils {
 	 * @param directoryName
 	 * @return
 	 */
-	public static boolean createDirectory(String directoryName) {
+	public static boolean createDirectory(String directoryPath) {
 		boolean status;
-		if (!directoryName.equals("")) {
-			File path = Environment.getExternalStorageDirectory();
-			File newPath = new File(path.toString() + directoryName);
+		if (!"".equals(directoryPath)) {
+			File newPath = new File(directoryPath);
 			status = newPath.mkdir();
+			status = true;
+		} else
+			status = false;
+		return status;
+	}
+	
+	/**
+	 * 新建目录
+	 * @param directoryName
+	 * @return
+	 */
+	public static boolean createDirectorys(String directoryPath) {
+		System.out.println("新建目录"+directoryPath);
+		boolean status;
+		if (!"".equals(directoryPath)) {
+			File newPath = new File(directoryPath);
+			status = newPath.mkdirs();
 			status = true;
 		} else
 			status = false;
@@ -360,7 +366,7 @@ public class FileUtils {
 	 * 检查是否安装SD卡
 	 * @return
 	 */
-	public static boolean checkSaveLocationExists() {
+	public static boolean checkSDCardExists() {
 		String sDCardStatus = Environment.getExternalStorageState();
 		boolean status;
 		if (sDCardStatus.equals(Environment.MEDIA_MOUNTED)) {
@@ -375,14 +381,12 @@ public class FileUtils {
 	 * @param fileName
 	 * @return
 	 */
-	public static boolean deleteDirectory(String fileName) {
+	public static boolean deleteDirectory(String filePath) {
 		boolean status;
 		SecurityManager checker = new SecurityManager();
 
-		if (!fileName.equals("")) {
-
-			File path = Environment.getExternalStorageDirectory();
-			File newPath = new File(path.toString() + fileName);
+		if (!"".equals(filePath)) {
+			File newPath = new File(filePath);
 			checker.checkDelete(newPath.toString());
 			if (newPath.isDirectory()) {
 				String[] listfile = newPath.list();
@@ -395,7 +399,7 @@ public class FileUtils {
 						deletedFile.delete();
 					}
 					newPath.delete();
-					Log.i("DirectoryManager deleteDirectory", fileName);
+					Log.i("DirectoryManager deleteDirectory", filePath);
 					status = true;
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -414,18 +418,16 @@ public class FileUtils {
 	 * @param fileName
 	 * @return
 	 */
-	public static boolean deleteFile(String fileName) {
+	public static boolean deleteFile(String filePath) {
 		boolean status;
 		SecurityManager checker = new SecurityManager();
 
-		if (!fileName.equals("")) {
-
-			File path = Environment.getExternalStorageDirectory();
-			File newPath = new File(path.toString() + fileName);
+		if (!"".equals(filePath)) {
+			File newPath = new File(filePath);
 			checker.checkDelete(newPath.toString());
 			if (newPath.isFile()) {
 				try {
-					Log.i("DirectoryManager deleteFile", fileName);
+					Log.i("DirectoryManager deleteFile", filePath);
 					newPath.delete();
 					status = true;
 				} catch (SecurityException se) {

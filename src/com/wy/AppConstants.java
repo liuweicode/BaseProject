@@ -19,6 +19,7 @@ import com.wy.widget.AppToast;
 public abstract class AppConstants {
 
 	public final static String CONF_APP_UNIQUEID = "APP_UNIQUEID";//App唯一标识
+	public static final String ISABNORMALEXIT = "is_Abnormal_Exit";//是否非正常退出
 	
 	public static final int PAGE_SIZE = 20;//默认分页大小
 	

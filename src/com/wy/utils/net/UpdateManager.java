@@ -19,9 +19,6 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
@@ -34,6 +31,8 @@ import android.widget.TextView;
 import com.wy.AppConstants;
 import com.wy.R;
 import com.wy.bean.Update;
+import com.wy.utils.apk.ApkInfo;
+import com.wy.utils.apk.ApplicationUtil;
 import com.wy.widget.AppToast;
 
 /** 
@@ -150,12 +149,8 @@ public class UpdateManager {
 					if(mUpdate != null){
 						int curVersionCode = -1;
 						//获取当前版本号
-						try {
-							PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_CONFIGURATIONS);
-							curVersionCode = packageInfo.versionCode;
-						} catch (NameNotFoundException e) {
-							e.printStackTrace();
-						}
+						ApkInfo apkInfo = ApplicationUtil.getApkInfo();
+						curVersionCode = apkInfo.versionCode;
 						
 						if(curVersionCode < mUpdate.getVersionCode()){
 							apkUrl = mUpdate.getDownloadURL();
