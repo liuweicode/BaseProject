@@ -1,10 +1,9 @@
-package com.wy.ui.impl;
+package com.wy.ui;
 
 import android.app.ListActivity;
 import android.os.Bundle;
 
 import com.wy.AppContext;
-import com.wy.ui.IBaseListActivity;
 import com.wy.utils.ui.ActivityTaskManager;
 
 /** 
@@ -16,7 +15,7 @@ import com.wy.utils.ui.ActivityTaskManager;
  * 
  * 创建时间: 2013-1-16
  */
-public abstract class BaseListActivity extends ListActivity implements IBaseListActivity{
+public abstract class BaseListActivity extends ListActivity{
 
 	protected final String LOG_TAG = this.getClass().getSimpleName();
 	
@@ -27,10 +26,6 @@ public abstract class BaseListActivity extends ListActivity implements IBaseList
 		super.onCreate(savedInstanceState);
 		//添加Activity到堆栈
 		ActivityTaskManager.getInstance().putActivity(LOG_TAG, this);
-		//加载界面配置
-		setContentView();
-		//初始化界面控件
-		initView();
 	}
 
 	@Override

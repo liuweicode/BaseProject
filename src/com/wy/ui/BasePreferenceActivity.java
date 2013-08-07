@@ -1,9 +1,8 @@
-package com.wy.ui.impl;
+package com.wy.ui;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
-import com.wy.ui.IBasePreferenceActivity;
 import com.wy.utils.ui.ActivityTaskManager;
 
 /** 
@@ -15,7 +14,7 @@ import com.wy.utils.ui.ActivityTaskManager;
  * 
  * 创建时间: 2013-1-28
  */
-public abstract class BasePreferenceActivity extends PreferenceActivity implements IBasePreferenceActivity{
+public abstract class BasePreferenceActivity extends PreferenceActivity{
 
 	protected final String LOG_TAG = this.getClass().getSimpleName();
 	
@@ -24,10 +23,6 @@ public abstract class BasePreferenceActivity extends PreferenceActivity implemen
 		super.onCreate(savedInstanceState);
 		//添加Activity到堆栈
 		ActivityTaskManager.getInstance().putActivity(LOG_TAG, this);
-		//加载界面配置
-		setContentView();
-		//初始化界面控件
-		initView();
 	}
 
 	@Override
