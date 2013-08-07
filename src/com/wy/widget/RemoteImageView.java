@@ -19,7 +19,7 @@ import android.widget.ListView;
 import com.wy.AppContext;
 
 /** 
- * 描述：
+ * 描述：网络图片
  *
  * 作者: Liu wei
  * 
