@@ -475,27 +475,31 @@ public final class R {
         public static int loading_6=0x7f02000b;
         public static int loading_7=0x7f02000c;
         public static int new_data_toast=0x7f02000d;
-        public static int widget_dface=0x7f02000e;
+        public static int notification_error=0x7f02000e;
+        public static int widget_dface=0x7f02000f;
     }
     public static final class id {
-        public static int app_toast_message=0x7f090000;
-        public static int head_arrowImageView=0x7f090005;
-        public static int head_contentLayout=0x7f090004;
-        public static int head_lastUpdatedTextView=0x7f090008;
-        public static int head_progressBar=0x7f090006;
-        public static int head_tipsTextView=0x7f090007;
-        public static int listview_foot_more=0x7f090002;
-        public static int listview_foot_progress=0x7f090001;
-        public static int textView1=0x7f090003;
-        public static int update_progress=0x7f090009;
-        public static int update_progress_text=0x7f09000a;
+        public static int app_toast_message=0x7f090002;
+        public static int button=0x7f090001;
+        public static int editText_phoneNumber=0x7f090000;
+        public static int head_arrowImageView=0x7f090007;
+        public static int head_contentLayout=0x7f090006;
+        public static int head_lastUpdatedTextView=0x7f09000a;
+        public static int head_progressBar=0x7f090008;
+        public static int head_tipsTextView=0x7f090009;
+        public static int listview_foot_more=0x7f090004;
+        public static int listview_foot_progress=0x7f090003;
+        public static int textView1=0x7f090005;
+        public static int update_progress=0x7f09000b;
+        public static int update_progress_text=0x7f09000c;
     }
     public static final class layout {
-        public static int app_toast=0x7f030000;
-        public static int listview_footer=0x7f030001;
-        public static int popup_window_toast=0x7f030002;
-        public static int pull_to_refresh_head=0x7f030003;
-        public static int update_progress=0x7f030004;
+        public static int activity_send_error_msg=0x7f030000;
+        public static int app_toast=0x7f030001;
+        public static int listview_footer=0x7f030002;
+        public static int popup_window_toast=0x7f030003;
+        public static int pull_to_refresh_head=0x7f030004;
+        public static int update_progress=0x7f030005;
     }
     public static final class raw {
         public static int error=0x7f050000;
