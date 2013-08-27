@@ -38,7 +38,7 @@ public abstract class XmlAppClient extends AppClient{
 	 * @param url
 	 * @throws Exception
 	 */
-	protected InputStream _GET(AppContext appContext,String url) throws HttpException, IOException {
+	protected InputStream _GET(String url) throws HttpException, IOException {
 		System.out.println("get_url==> " + url);
 		
 		String cookie = getCookie();
